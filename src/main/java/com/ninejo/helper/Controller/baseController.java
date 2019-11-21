@@ -17,4 +17,36 @@ public class baseController {
         model.addAttribute("temp","헬로");
         return "test";
     }
+
+    @RequestMapping(value = "/") //시작화면
+    public String index(Model model) throws IOException, SAXException, ParserConfigurationException{
+        return "index";
+    }
+
+    @RequestMapping(value = "/main") //메인화면
+    public String mainWindow(Model model) throws IOException, SAXException, ParserConfigurationException{
+        return "main";
+    }
+
+    @RequestMapping(value = "/requestRegist") //요청 페이지
+    public String requestRegist(Model model) throws IOException, SAXException, ParserConfigurationException{
+        return "requestRegist";
+    }
+
+    @RequestMapping(value = "/requestList") //의뢰 목록
+    public String requestList(Model model) throws IOException, SAXException, ParserConfigurationException{
+        return "requestList";
+    }
+
+    @RequestMapping(value = "/progress") //현재 진행중인 의뢰목록
+    public String progress(Model model) throws IOException, SAXException, ParserConfigurationException{
+        return "progress";
+    }
+
+    @RequestMapping(value = "/myInfo") //내정보
+    public String myInfo(Model model) throws IOException, SAXException, ParserConfigurationException{
+        return "myInfo";
+    }
+
+
 }
