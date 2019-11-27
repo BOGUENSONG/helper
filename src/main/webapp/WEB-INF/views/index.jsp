@@ -33,11 +33,7 @@
         // false면 alert("재입력 하세요") 출력
         // 아이디: registID 비번: registPW 전화번호 registPN
     }
-    function registToServer(){
-        //서버에 폼에 적힌 id, password, phonenumber를 보냄
-        //db에 저장후 정상처리되면 ok후 location.href를 이용해 다음페이지로 넘어감
-    }
-
+    
     function loginValidation(){
         //로그인 검사
         //id와 password를 DB에 보내서 true/false 받아옴
