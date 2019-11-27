@@ -20,7 +20,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: { "id": $('#registID').val(), "pw": $('#loginPW').val(),"pn" : $('registPN').val()},
+            data: { "id": $('#registID').val(), "pw": $('#registPW').val(),"pn" : $('#registPN').val()},
             success: function(data) {
                 location.href="/main";
             },
@@ -33,8 +33,21 @@
         // false면 alert("재입력 하세요") 출력
         // 아이디: registID 비번: registPW 전화번호 registPN
     }
-    
+
     function loginValidation(){
+        $.ajax({
+            url: "/loginValid",
+            type: "get",
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: { "id": $('#loginID').val(), "pw": $('#loginPW').val()},
+            success: function(data) {
+                location.href="/main";
+            },
+            error:function(error) {
+                alert("잘못된 정보입니다.");
+            }
+        });
         //로그인 검사
         //id와 password를 DB에 보내서 true/false 받아옴
         //true경우 location.href 다음페이지
