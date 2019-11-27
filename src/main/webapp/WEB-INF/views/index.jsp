@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: HELPER</title>
 </head>
 <body>
@@ -14,6 +15,19 @@
     //이전창 이름 :
     }
     function registValidation(){
+        $.ajax({
+            url: "/registValid",
+            type: "get",
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: { "id": $('#registID').val(), "pw": $('#loginPW').val(),"pn" : $('registPN').val()},
+            success: function(data) {
+                location.href="/main";
+            },
+            error:function(error) {
+                alert("중복된 ID가 존재합니다.");
+            }
+        });
         //서버에 아이디 전송 해서 DB검색후 중복여부 확인후 true return 리턴
         //받은 값이 true면 registToserver()
         // false면 alert("재입력 하세요") 출력
