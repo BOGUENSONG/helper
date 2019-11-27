@@ -22,10 +22,15 @@
             contentType:'application/json; charset=utf-8',
             data: { "id": $('#registID').val(), "pw": $('#registPW').val(),"pn" : $('#registPN').val()},
             success: function(data) {
-                location.href="/main";
+                if (data) {
+                    location.href="/main";
+                }
+                else {
+                    alert("이미 중복된 아이디가 있습니다.");
+                }
             },
             error:function(error) {
-                alert("중복된 ID가 존재합니다.");
+                alert("서버 오류");
             }
         });
         //서버에 아이디 전송 해서 DB검색후 중복여부 확인후 true return 리턴
@@ -42,10 +47,15 @@
             contentType:'application/json; charset=utf-8',
             data: { "id": $('#loginID').val(), "pw": $('#loginPW').val()},
             success: function(data) {
-                location.href="/main";
+                if (data) {
+                    location.href="/main";
+                }
+                else {
+                    alert("잘못된 정보입니다.");
+                }
             },
             error:function(error) {
-                alert("잘못된 정보입니다.");
+                alert("서버 오류");
             }
         });
         //로그인 검사
