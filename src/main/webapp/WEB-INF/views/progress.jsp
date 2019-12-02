@@ -44,5 +44,9 @@
     <p> 내용 : <c:out value="${text}"/> </p>
 </div>
 </body>
+<script>
+    var id = session.getAttribute("id"); //세션에 저장된 id값
+
+</script>
 
 </html>

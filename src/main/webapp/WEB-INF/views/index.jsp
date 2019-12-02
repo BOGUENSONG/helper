@@ -20,9 +20,10 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: { "id": $('#registID').val(), "pw": $('#registPW').val(),"pn" : $('#registPN').val()},
+            data: { "registID": $('#registID').val(), "registPW": $('#registPW').val(),"registPN" : $('#registPN').val()},
             success: function(data) {
                 if (data) {
+                    session.setAttribute(id,"registID"); //세션에 id정보 저장
                     location.href="/main";
                 }
                 else {
@@ -33,10 +34,6 @@
                 alert("서버 오류");
             }
         });
-        //서버에 아이디 전송 해서 DB검색후 중복여부 확인후 true return 리턴
-        //받은 값이 true면 registToserver()
-        // false면 alert("재입력 하세요") 출력
-        // 아이디: registID 비번: registPW 전화번호 registPN
     }
 
     function loginValidation(){
@@ -45,9 +42,10 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: { "id": $('#loginID').val(), "pw": $('#loginPW').val()},
+            data: { "loginID": $('#loginID').val(), "loginPW": $('#loginPW').val()},
             success: function(data) {
                 if (data) {
+                    session.setAttribute(id,"loginID"); //세선에 id정보 저장
                     location.href="/main";
                 }
                 else {

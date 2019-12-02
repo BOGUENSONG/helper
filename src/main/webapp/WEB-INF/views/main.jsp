@@ -7,13 +7,17 @@
 </head>
 <body>
 <script>
+    var id = session.getAttribute("id"); //현재 세션에 저장된 id값
     function goProgressingRequest(){
+        location.href="/progress";
         //현재 진행중인 의뢰 페이지로 이동
     }
     function goMyInfo(){
+        location.href="/myinfo";
         // 내 정보 관리 페이지로 이동
     }
     function goRegistRequest(){
+        location.href="/requestRegist";
         // 의뢰 등록 페이지로 이동
         // 여기서 페이지 이동전, 이미 내가 의뢰한 의뢰가 있는지 확인
         // id를 서버로 보내서 의뢰 있는지 false/ true를 받아서
@@ -21,6 +25,7 @@
 
     }
     function goRequestList(){
+        location.href="/requestList";
         //의뢰 목록 페이지로 이동
 
     }
