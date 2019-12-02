@@ -10,7 +10,7 @@
 <div>--- 리스트 ---</div>
 <div>--- 모달 ---</div>
 <script>
-    var id = "<%=session.getAttribute("id") %>"//현재 세션에 저장된 id값
+    var id;//현재 세션에 저장된 id값
 </script>
 </body>
 

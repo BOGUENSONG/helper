@@ -7,7 +7,7 @@
 </head>
 <body>
 <script>
-    var id = "<%=session.getAttribute("id") %>"//현재 세션에 저장된 id값
+    var id;//현재 세션에 저장된 id값
     function requestRegistOK(){
         $.ajax({
             url: "/requestRegist",

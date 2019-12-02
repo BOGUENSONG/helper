@@ -23,9 +23,6 @@
             data: { "ID": $('#registID').val(), "PW": $('#registPW').val(),"PN" : $('#registPN').val()},
             success: function(data) {
                 if (data) {
-                    "<%=session.setAttribute("id","registID")%>"
-
-
                     location.href="/main";
                 }
                 else {
@@ -47,7 +44,6 @@
             data: { "ID": $('#loginID').val(), "PW": $('#loginPW').val()},
             success: function(data) {
                 if (data) {
-                    "<%=session.setAttribute("id","loginID")%>"//세선에 id정보 저장
                     location.href="/main";
                 }
                 else {
