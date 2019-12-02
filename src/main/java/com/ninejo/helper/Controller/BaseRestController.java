@@ -17,7 +17,6 @@ public class BaseRestController {
     @RequestMapping(value = "/loginValid" , method = RequestMethod.GET) //로그인
     public boolean loginValid(@RequestParam("ID")String id, @RequestParam("PW")String pw)
     {
-
         //db에서 검색해서 true나 false 리턴한다.
 
         return false;
