@@ -8,12 +8,12 @@ public class DBControl {
 
     public boolean isIdExist (String id) throws SQLException {
 
-        String sql = "select count(*) from member where id ?";
+        String sql = "select count(*) from helper.member where id = '?'";
 
         db.setPStatement(sql, id);
         ResultSet rs = db.getPStatement().getResultSet();
 
-        String count = rs.getString("count");
+        String count = rs.getString("count(*)");
         if(count.equals("0"))
             return false;
         else
