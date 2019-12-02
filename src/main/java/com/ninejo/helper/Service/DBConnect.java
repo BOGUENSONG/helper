@@ -48,6 +48,36 @@ public class  DBConnect  {
             System.err.println(ex);
         }
     }
+    public void setPStatement(String sql, String s1, String s2, String s3) {
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(url, ID, PW);
+            pstmt = con.prepareStatement(sql);
+            ((PreparedStatement) pstmt).setString(1, s1);
+            ((PreparedStatement) pstmt).setString(2, s2);
+            ((PreparedStatement) pstmt).setString(3, s3);
+        }
+        catch(Exception ex)
+        {
+            System.err.println(ex);
+        }
+    }
+
+    public ResultSet getResult(String sql) {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url, ID, PW);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs;
+        }
+        catch(Exception ex)
+        {
+            System.err.println(ex);
+        }
+        return null;
+    }
+
 
     public Statement getStatement()
     {
