@@ -15,7 +15,7 @@ public class BaseRestController {
     private String driver;
 
     @RequestMapping(value = "/loginValid" , method = RequestMethod.GET) //로그인
-    public boolean loginValid(@RequestParam("loginID")String id, @RequestParam("loginPW")String pw)
+    public boolean loginValid(@RequestParam("ID")String id, @RequestParam("PW")String pw)
     {
 
         //db에서 검색해서 true나 false 리턴한다.
@@ -24,7 +24,7 @@ public class BaseRestController {
     }
 
     @RequestMapping(value = "/registValid" , method = RequestMethod.GET) //회원가입
-    public boolean registValid(@RequestParam("registID")String id, @RequestParam("registPW")String pw, @RequestParam("registPN")String pn)
+    public boolean registValid(@RequestParam("ID")String id, @RequestParam("PW")String pw, @RequestParam("PN")String pn)
     {
         //db에서 검색해서 true나 false 리턴한다.
 
@@ -32,7 +32,7 @@ public class BaseRestController {
     }
 
     @RequestMapping(value = "/changepw" , method = RequestMethod.GET) //내정보 변경
-    public boolean changePW(@RequestParam("ID")String id, @RequestParam("newPW")String pw, @RequestParam("newPN")String pn)
+    public boolean changePW(@RequestParam("ID")String id, @RequestParam("PW")String pw, @RequestParam("PN")String pn)
     {
         //db에서 검색해서 true나 false 리턴한다.
 
@@ -55,6 +55,13 @@ public class BaseRestController {
     }
     @RequestMapping(value = "/solvedrequest" , method = RequestMethod.GET) //나의 완료된 의뢰 리턴
     public boolean solvedRequest(@RequestParam("ID")String id)
+    {
+        //db에서 검색해서 true나 false 리턴한다.
+
+        return false;
+    }
+    @RequestMapping(value = "/requestRegist" , method = RequestMethod.GET) //의뢰 등록
+    public boolean requestRegist(@RequestParam("ID")String id, @RequestParam("Title")String title, @RequestParam("Date")String date, @RequestParam("Point")String point, @RequestParam("Place")String place, @RequestParam("Text")String text)
     {
         //db에서 검색해서 true나 false 리턴한다.
 

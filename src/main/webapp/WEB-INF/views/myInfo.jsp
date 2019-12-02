@@ -14,7 +14,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": $(id).val(), "newPW": $('#newPW').val(), "newPN": $('#newPN').val()},
+            data: {"ID": $(id).val(), "PW": $('#newPW').val(), "PN": $('#newPN').val()},
             success: function(data) {
                 if (data) {
                     alert("내정보 변경완료");
@@ -85,7 +85,7 @@
             data: {"ID": $(id).val()},
             success: function(data) {
                 if (data) {
-                    alert("포인트 반납완료");
+
                 }
                 else {
                     alert("SQL오류");

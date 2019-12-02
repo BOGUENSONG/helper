@@ -20,7 +20,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: { "registID": $('#registID').val(), "registPW": $('#registPW').val(),"registPN" : $('#registPN').val()},
+            data: { "ID": $('#registID').val(), "PW": $('#registPW').val(),"PN" : $('#registPN').val()},
             success: function(data) {
                 if (data) {
                     session.setAttribute(id,"registID"); //세션에 id정보 저장
@@ -42,7 +42,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: { "loginID": $('#loginID').val(), "loginPW": $('#loginPW').val()},
+            data: { "ID": $('#loginID').val(), "PW": $('#loginPW').val()},
             success: function(data) {
                 if (data) {
                     session.setAttribute(id,"loginID"); //세선에 id정보 저장

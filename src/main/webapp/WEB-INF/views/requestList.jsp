@@ -9,6 +9,9 @@
 <h1> HELPER :: 의뢰목록 </h1>
 <div>--- 리스트 ---</div>
 <div>--- 모달 ---</div>
+<script>
+    var id = session.getAttribute("id");
+</script>
 </body>
 
 </html>
