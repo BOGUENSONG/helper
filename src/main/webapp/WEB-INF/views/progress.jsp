@@ -46,7 +46,48 @@
 </body>
 <script>
     var id = session.getAttribute("id"); //세션에 저장된 id값
-    
+    function myrequsting(){ //내가 요청한 의뢰
+        $.ajax({
+            url: "/myrequesting",
+            type: "get",
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: {"ID": $(id).val()},
+            success: function(data) {
+                if (data) {
+
+                }
+                else {
+                    alert("SQL오류");
+                }
+            },
+            error:function(error) {
+                alert("서버 오류");
+            }
+        });
+    }
+
+    function mysolving(){ //내가 해결중인 의뢰
+        $.ajax({
+            url: "/mysolving",
+            type: "get",
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: {"ID": $(id).val()},
+            success: function(data) {
+                if (data) {
+
+                }
+                else {
+                    alert("SQL오류");
+                }
+            },
+            error:function(error) {
+                alert("서버 오류");
+            }
+        });
+    }
+
 </script>
 
 </html>

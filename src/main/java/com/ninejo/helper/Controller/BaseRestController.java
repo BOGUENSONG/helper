@@ -67,5 +67,19 @@ public class BaseRestController {
 
         return false;
     }
+    @RequestMapping(value = "/mysolving" , method = RequestMethod.GET) //내가 해결중인 의뢰
+    public boolean mysolve(@RequestParam("ID")String id)
+    {
+        //db에서 검색해서 true나 false 리턴한다.
+
+        return false;
+    }
+    @RequestMapping(value = "/myrequesting" , method = RequestMethod.GET) //내가 등록하고 해결되지 않은 의뢰
+    public boolean myrequest(@RequestParam("ID")String id)
+    {
+        //db에서 검색해서 true나 false 리턴한다.
+
+        return false;
+    }
 
 }
