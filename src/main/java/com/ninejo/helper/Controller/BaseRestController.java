@@ -18,7 +18,7 @@ public class BaseRestController {
     public boolean loginValid(@RequestParam("ID")String id, @RequestParam("PW")String pw)
     {
 
-        //db에서 검색해서 true나 false 리턴한다.
+        // isIdExist -> id 이미 존재시 true 없을시 false
 
         return false;
     }
@@ -26,15 +26,15 @@ public class BaseRestController {
     @RequestMapping(value = "/registValid" , method = RequestMethod.GET) //회원가입
     public boolean registValid(@RequestParam("ID")String id, @RequestParam("PW")String pw, @RequestParam("PN")String pn)
     {
-        //db에서 검색해서 true나 false 리턴한다.
-
+        // isIdExist -> 사용 이미 존재시 알림 출력
+        // -> 없을시 resister 사용
         return false;
     }
 
     @RequestMapping(value = "/changepw" , method = RequestMethod.GET) //내정보 변경
     public boolean changePW(@RequestParam("ID")String id, @RequestParam("PW")String pw, @RequestParam("PN")String pn)
     {
-        //db에서 검색해서 true나 false 리턴한다.
+        // changeInfo - id pw pn 매개변수로 받아서 해당 id
 
         return false;
     }
@@ -42,14 +42,14 @@ public class BaseRestController {
     @RequestMapping(value = "/pointadd" , method = RequestMethod.GET) //포인트충전
     public boolean pointAdd(@RequestParam("ID")String id)
     {
-        //db에서 검색해서 true나 false 리턴한다.
+        // addPoint <- id, 증가시킬 point
 
         return false;
     }
     @RequestMapping(value = "/pointsub" , method = RequestMethod.GET) //포인트회수
     public boolean pointSub(@RequestParam("ID")String id)
     {
-        //db에서 검색해서 true나 false 리턴한다.
+        // subPoint <- id, 감소시킬 point
 
         return false;
     }
