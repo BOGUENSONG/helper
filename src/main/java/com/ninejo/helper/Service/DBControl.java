@@ -161,7 +161,7 @@ public class DBControl {
     public boolean postRequest (String requester_id, int reward, String title, String locate, String contents) throws SQLException{
 
         boolean idle = false;
-        idle = hasPostRequest(requester_id);
+        idle = !hasPostRequest(requester_id);
         int req_num = getReqCount() + 1;
 
         if(idle) {
@@ -183,7 +183,7 @@ public class DBControl {
     public boolean acceptRequest (String id, int req_num) throws  SQLException {
 
         boolean idle = false;
-        idle = hasAcptRequest(id);
+        idle = !hasAcptRequest(id);
         if (idle) {
             String sql = String.format("update helper.request set accepted_id = '%s' where req_num = %d", id, req_num);
             ResultSet rs = db.getResult(sql);
