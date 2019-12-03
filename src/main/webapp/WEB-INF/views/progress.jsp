@@ -45,7 +45,7 @@
 </div>
 </body>
 <script>
-    var id = session.getAttribute("id"); //세션에 저장된 id값
+    var id;//현재 세션에 저장된 id값
     function myrequsting(){ //내가 요청한 의뢰
         $.ajax({
             url: "/myrequesting",
