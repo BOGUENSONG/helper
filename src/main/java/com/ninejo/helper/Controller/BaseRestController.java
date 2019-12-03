@@ -6,21 +6,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.ninejo.helper.Service.DBControl;
 
+import java.sql.SQLException;
 
 
 @RestController
 public class BaseRestController {
+    DBControl dbc = new DBControl();
+
     @Value("${spring.datasource.driver-class-name}")
     private String driver;
 
     @RequestMapping(value = "/loginValid" , method = RequestMethod.GET) //로그인
-    public boolean loginValid(@RequestParam("ID")String id, @RequestParam("PW")String pw)
-    {
+    public boolean loginValid(@RequestParam("ID")String id, @RequestParam("PW")String pw) throws SQLException {
 
-        // isIdExist -> id 이미 존재시 true 없을시 false
+        return !dbc.isIdExist(id);
 
-        return false;
     }
 
     @RequestMapping(value = "/registValid" , method = RequestMethod.GET) //회원가입
@@ -63,13 +65,14 @@ public class BaseRestController {
     @RequestMapping(value = "/requestRegist" , method = RequestMethod.GET) //의뢰 등록
     public boolean requestRegist(@RequestParam("ID")String id, @RequestParam("Title")String title, @RequestParam("Date")String date, @RequestParam("Point")String point, @RequestParam("Place")String place, @RequestParam("Text")String text)
     {
-        //db에서 검색해서 true나 false 리턴한다.
+        // postRequest <- 등록자id, 보상point, 제목, 장소, 내용 -> 이미 등록했으면 false, 아니면 수행 후 true 리턴
 
         return false;
     }
     @RequestMapping(value = "/mysolving" , method = RequestMethod.GET) //내가 해결중인 의뢰
     public boolean mysolve(@RequestParam("ID")String id)
     {
+
         //db에서 검색해서 true나 false 리턴한다.
 
         return false;
@@ -81,5 +84,8 @@ public class BaseRestController {
 
         return false;
     }
+    /*
+    의뢰 수락
 
+     */
 }
