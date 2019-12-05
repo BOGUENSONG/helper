@@ -3,12 +3,17 @@ package com.ninejo.helper.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.xml.sax.SAXException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 @Controller
+@SessionAttributes("id")
 public class baseController {
 
     //주소창에 localhost:1234/ 치면 이동
@@ -47,6 +52,5 @@ public class baseController {
     public String myInfo(Model model) throws IOException, SAXException, ParserConfigurationException{
         return "myInfo";
     }
-
 
 }

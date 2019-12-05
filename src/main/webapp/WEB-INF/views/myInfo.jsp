@@ -3,18 +3,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 내정보 </title>
 </head>
 <body>
 <script>
-    var id;//현재 세션에 저장된 id값
+    var id = 'id';//현재 세션에 저장된 id값
     function modifyInfo(){
         $.ajax({
             url: "/changepw",
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": $(id).val(), "PW": $('#newPW').val(), "PN": $('#newPN').val()},
+            data: {"ID": id, "PW": $('#newPW').val(), "PN": $('#newPN').val()},
             success: function(data) {
                 if (data) {
                     alert("내정보 변경완료");
@@ -38,7 +39,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": $(id).val()},
+            data: {"ID": id},
             success: function(data) {
                 if (data) {
                     alert("포인트 충전완료");
@@ -60,7 +61,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": $(id).val()},
+            data: {"ID": id},
             success: function(data) {
                 if (data) {
                     alert("포인트 반납완료");
@@ -82,7 +83,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": $(id).val()},
+            data: {"ID": id},
             success: function(data) {
                 if (data) {
 

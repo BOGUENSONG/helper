@@ -28,32 +28,36 @@ public class DBControl {
         String sql = String.format(" insert into helper.member (id, password, phone_number) " +
                 "values ('%s', '%s', '%s')", id, password, phoneNumber);
 
-        ResultSet rs = db.getResult(sql);
+        db.getResultmodify(sql);
     } // id, pw, pn 매개변수로 받아서 db에 저장
 
     public void changeInfo (String id, String password, String phoneNumber) throws  SQLException{
-
-        String sql = String.format("update helper.member set password = '%s' where id = '%s'",  password, id);
-
-        ResultSet rs = db.getResult(sql);
-
-        String sql2 = String.format("update helper.member set phone_number = '%s' where id = '%s'",   phoneNumber, id);
-
-        ResultSet rs2 = db.getResult(sql2);
+        if (password == null) {
+            String sql = String.format("update helper.member set phone_number = '%s' where id = '%s'",   phoneNumber, id);
+            db.getResultmodify(sql);
+        }
+        else if (phoneNumber == null) {
+            String sql = String.format("update helper.member set password = '%s' where id = '%s'",  password, id);
+            db.getResultmodify(sql);
+        }
+        else {
+            String sql = String.format("update helper.member set phone_number = '%s', password = '%s' where id = '%s'",   phoneNumber, password, id);
+            db.getResultmodify(sql);
+        }
     } // id, pw, pn 매개변수로 받아서 해당 id의 pw, pn 데이터 변경
 
     public void addPoint (String id, int point) throws  SQLException {
 
         String sql = String.format("update helper.member set point = point + %d where id = '%s'", point, id);
 
-        ResultSet rs = db.getResult(sql);
+        db.getResultmodify(sql);
     } // id, point 매개변수로 받아서 해당 id의 포인트 값 증가
 
     public void subPoint (String id, int point) throws  SQLException {
 
         String sql = String.format("update helper.member set point = point - %d where id = '%s'", point, id);
 
-        ResultSet rs = db.getResult(sql);
+        db.getResultmodify(sql);
     } // id, point 매개변수로 받아서 해당 id의 포인트 값 감소
 
     public ArrayList<request> getRequestList () throws SQLException {
@@ -161,7 +165,7 @@ public class DBControl {
     public boolean postRequest (String requester_id, int reward, String title, String locate, String contents) throws SQLException{
 
         boolean idle = false;
-        idle = !hasPostRequest(requester_id);
+        idle = !hasPostRequest(requester_id); //이거 제대로 체크안됨
         int req_num = getReqCount() + 1;
 
         if(idle) {
@@ -169,12 +173,12 @@ public class DBControl {
                             "(%d, '%s', %d, '%s', curdate(), '%s', '%s', false)"
                     , req_num, requester_id, reward, title, locate, contents);
 
-            ResultSet rs = db.getResult(sql);
+            db.getResultmodify(sql);
 
-            String sql2 = String.format("update helper.member set req_request = %d where id = '%s'", req_num, requester_id);
-
-            ResultSet rs2 = db.getResult(sql2);
         }
+        // String sql2 = String.format("update helper.member set req_request = %d where id = '%s'", req_num, requester_id);
+        // db.getResult(sql2); ->이거 무슨용도인지..
+
         return idle;
 
     } // 매개변수 받아서 의뢰 등록.

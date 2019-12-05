@@ -3,18 +3,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 의뢰등록 </title>
 </head>
 <body>
 <script>
-    var id;//현재 세션에 저장된 id값
+    var id = 'id';//현재 세션에 저장된 id값
     function requestRegistOK(){
         $.ajax({
-            url: "/requestRegist",
+            url: "/requestRegistdb",
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": $(id).val(), "Title": $('#regTitle').val(), "Point": $('#regPoint').val(), "Date": $('#regDate').val(), "Place": $('#regPlace').val(), "Text": $('#regTextarea').val(),},
+            data: {"ID": id, "Title": $('#regTitle').val(), "Point": $('#regPoint').val(), "Place": $('#regPlace').val(), "Text": $('#regTextarea').val(),},
             success: function(data) {
                 if (data) {
                     alert("의뢰 등록 완료");
@@ -40,7 +41,6 @@
 <h1> HELPER :: 의뢰등록 </h1>
 <div> 폼 div
 <input type="text" placeholder="제목" id="regTitle">
-    <input type="date" id="regDate">
     <input type="number" placeholder="포인트" id="regPoint">
     <input type="text" placeholder="장소" id="regPlace">
     <textarea placeholder="여기에 상세내용을 입력하세요" id="regTextarea"></textarea>

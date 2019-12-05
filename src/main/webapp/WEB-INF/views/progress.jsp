@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 현재 진행중 </title>
 </head>
 <body>
@@ -45,14 +46,14 @@
 </div>
 </body>
 <script>
-    var id;//현재 세션에 저장된 id값
+    var id = 'id';//현재 세션에 저장된 id값
     function myrequsting(){ //내가 요청한 의뢰
         $.ajax({
             url: "/myrequesting",
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": $(id).val()},
+            data: {"ID": id},
             success: function(data) {
                 if (data) {
 
@@ -73,7 +74,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": $(id).val()},
+            data: {"ID": id},
             success: function(data) {
                 if (data) {
 

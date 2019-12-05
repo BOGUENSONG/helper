@@ -36,6 +36,20 @@ public class  DBConnect  {
         }
         return null;
     }
+
+    public int getResultmodify(String sql) {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection(url, ID, PW);
+            stmt = con.createStatement();
+            return stmt.executeUpdate(sql);
+        }
+        catch(Exception ex)
+        {
+            System.err.println(ex);
+        }
+        return 0;
+    }
     public Statement getStatement()
     {
         return stmt;
