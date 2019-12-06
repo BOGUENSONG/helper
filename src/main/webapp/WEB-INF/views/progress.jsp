@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 현재 진행중 </title>
+    <style type="text/css">
+        <%--        스타일 추가--%>
+    </style>
 </head>
 <body>
 <h1> HELPER :: 현재 진행중 </h1>

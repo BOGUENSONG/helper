@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 의뢰목록 </title>
+    <style type="text/css">
+        <%--        스타일 추가--%>
+    </style>
 </head>
 <script>
     var id = 'id';
