@@ -134,15 +134,14 @@ public class DBControl {
 
         ResultSet rs = db.getResult(sql);
 
-        String result = "";
-
         while(rs.next()){
-            result = rs.getString("req_request");
+            if(rs.wasNull())
+                return false;
+            else
+                return true;
         }
-        if(result==null)
-            return false;
-        else
-            return true;
+        return false;
+
     } // id를 매개변수로 받아서 등록한 의뢰가 있는지 검사. 있을경우 true, 없을경우 false
 
     public boolean hasAcptRequest (String id) throws  SQLException {
@@ -165,7 +164,7 @@ public class DBControl {
     public boolean postRequest (String requester_id, int reward, String title, String locate, String contents) throws SQLException{
 
         boolean idle = false;
-        idle = !hasPostRequest(requester_id); //이거 제대로 체크안됨
+        idle = !hasPostRequest(requester_id);
         int req_num = getReqCount() + 1;
 
         if(idle) {
@@ -176,8 +175,8 @@ public class DBControl {
             db.getResultmodify(sql);
 
         }
-        // String sql2 = String.format("update helper.member set req_request = %d where id = '%s'", req_num, requester_id);
-        // db.getResult(sql2); ->이거 무슨용도인지..
+        String sql2 = String.format("update helper.member set req_request = %d where id = '%s'", req_num, requester_id);
+        db.getResultmodify(sql2);
 
         return idle;
 
