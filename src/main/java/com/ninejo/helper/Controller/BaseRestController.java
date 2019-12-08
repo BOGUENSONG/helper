@@ -82,6 +82,7 @@ public class BaseRestController {
     {
         //db에서 검색해서 true나 false 리턴한다.
 
+        // getSolvedRequestList (id) -> 해결했던 의뢰 list 리턴
         return false;
     }
     @RequestMapping(value = "/requestRegistdb" , method = RequestMethod.GET) //의뢰 등록
@@ -101,6 +102,7 @@ public class BaseRestController {
     public boolean mysolve(@RequestParam("ID")String id)
     {
 
+       // getAcptRequest (id)
         //db에서 검색해서 true나 false 리턴한다.
 
         return false;
@@ -108,6 +110,7 @@ public class BaseRestController {
     @RequestMapping(value = "/myrequesting" , method = RequestMethod.GET) //내가 등록하고 해결되지 않은 의뢰
     public boolean myrequest(@RequestParam("ID")String id)
     {
+        // getPostRequest(id)
         //db에서 검색해서 true나 false 리턴한다.
 
         return false;

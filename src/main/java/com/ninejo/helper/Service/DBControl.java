@@ -86,11 +86,46 @@ public class DBControl {
         return rlist;
     } // request 클래스의 arraylist 반환.
 
-    public request getRequest (int req_num) throws SQLException {
+    public ArrayList<request> getSolvedRequestList (String id) throws SQLException {
 
-        String sql = String.format("select * from helper.request where req_num = %d", req_num);
+        ArrayList<request> rlist = new ArrayList<>();
+
+        String sql = String.format("select * from helper.request where is_completed = true & accepted_id = '%s'", id);
 
         ResultSet rs = db.getResult(sql);
+
+        while(rs.next()){
+            request r = new request();
+            r.req_num = rs.getInt("req_num");
+            r.requester_id = rs.getString("requester_id");
+            r.accepted_id = rs.getString("accepted_id");
+            r.reward = rs.getInt("reward");
+            r.title = rs.getString("title");
+            r.start_date = rs.getDate("start_date");
+            r.end_date = rs.getDate("end_date");
+            r.locate = rs.getString("locate");
+            r.contents = rs.getString("contents");
+            r.is_completed = rs.getBoolean("is_completed");
+
+            rlist.add(r);
+        }
+        return rlist;
+    } // request 클래스의 arraylist 반환. 파라미터로 받은 id의 해결했던 의뢰들 리턴
+
+    public request getPostRequest (String id) throws SQLException {
+
+        int num = 0;
+
+        String sql = String.format("select req_request from helper.member where id = '%s'");
+
+        ResultSet rs = db.getResult(sql);
+
+        while(rs.next())
+            num = rs.getInt("req_request");
+
+        sql = String.format("select * from helper.request where req_num = %d", num);
+
+        rs = db.getResult(sql);
 
         request r = new request();
 
@@ -108,7 +143,40 @@ public class DBControl {
 
         }
         return r;
-    } // reqnum 에 해당하는 request 반환
+    } // id를 받아서 현재 요청중인 request 반환
+
+    public request getAcptRequest (String id) throws SQLException {
+
+        int num = 0;
+
+        String sql = String.format("select acpt_request from helper.member where id = '%s'");
+
+        ResultSet rs = db.getResult(sql);
+
+        while(rs.next())
+            num = rs.getInt("acpt_request");
+
+        sql = String.format("select * from helper.request where req_num = %d", num);
+
+        rs = db.getResult(sql);
+
+        request r = new request();
+
+        while(rs.next()){
+            r.req_num = rs.getInt("req_num");
+            r.requester_id = rs.getString("requester_id");
+            r.accepted_id = rs.getString("accepted_id");
+            r.reward = rs.getInt("reward");
+            r.title = rs.getString("title");
+            r.start_date = rs.getDate("start_date");
+            r.end_date = rs.getDate("end_date");
+            r.locate = rs.getString("locate");
+            r.contents = rs.getString("contents");
+            r.is_completed = rs.getBoolean("is_completed");
+
+        }
+        return r;
+    } // id를 받아서 현재 해결중인 request 반환
 
     public member getMemberInfo (String id) throws SQLException{
 
@@ -128,21 +196,7 @@ public class DBControl {
         return m;
     }
 
-    public boolean hasPostRequest (String id) throws  SQLException {
 
-        String sql = String.format("select req_request from helper.member where id = '%s'", id);
-
-        ResultSet rs = db.getResult(sql);
-
-        while(rs.next()){
-            if(rs.wasNull())
-                return false;
-            else
-                return true;
-        }
-        return false;
-
-    } // id를 매개변수로 받아서 등록한 의뢰가 있는지 검사. 있을경우 true, 없을경우 false
 
     public boolean hasAcptRequest (String id) throws  SQLException {
 
@@ -189,24 +243,87 @@ public class DBControl {
         idle = !hasAcptRequest(id);
         if (idle) {
             String sql = String.format("update helper.request set accepted_id = '%s' where req_num = %d", id, req_num);
-            ResultSet rs = db.getResult(sql);
+            db.getResultmodify(sql);
             sql = String.format("update helper.member set acpt_request = %d where id = '%s'", req_num, id);
-            rs = db.getResult(sql);
+            db.getResultmodify(sql);
         }
         return idle;
     } // 의뢰수락/ 유저 id, 의뢰 번호 매개변수로 받음/ 현재수행중의뢰 없을경우 의뢰 수락완료하고 true 리턴 , 아닐경우 false 리턴.
 
+    public boolean completeRequest (int req_num) throws SQLException {
+
+        String rid = "";
+        String aid = "";
+        String sql = String.format("update helper.request set is_completed = true where req_num = %d",req_num);
+        db.getResultmodify(sql);
+
+        sql = String.format("select requester_id from helper.request where req_num = %d",req_num);
+        ResultSet rs = db.getResult(sql);
+        while(rs.next()){
+            rid = rs.getString("requester_id");
+        }
+        sql = String.format("select accepted_id from helper.request where req_num = %d",req_num);
+        rs = db.getResult(sql);
+        while(rs.next()){
+            aid = rs.getString("accepted_id");
+        }
+        sql = String.format("update helper.member set req_request = null where id = '%s'", rid);
+        db.getResultmodify(sql);
+
+        sql = String.format("update helper.member set acpt_request = null where id = '%s'", aid);
+        db.getResultmodify(sql);
+
+        return true;
+    } // 의뢰번호 매개변수로 받아서 의뢰테이블에서 해결여부 변경, 수락자 등록자에서 각각 수락중 등록중 의뢰 제거
+
+    public boolean cancelRequest (int req_num) throws SQLException {
+
+        String rid = "";
+        String sql = String.format("select requester_id from helper.request where req_num = %d",req_num);
+        ResultSet rs = db.getResult(sql);
+        while(rs.next()){
+            rid = rs.getString("requester_id");
+        }
+        if(rid!=null)
+            return false;
+
+        sql = String.format("update helper.member set req_request = null where id = '%s'", rid);
+        db.getResultmodify(sql);
+
+        sql = String.format("delete from helper.request where req_num = %d;",req_num);
+        db.getResultmodify(sql);
+
+        return true;
+    } // 의뢰번호 매개변수로 받아서 수락여부 확인 후 수락했으면 false 리턴, 안했으면 제거하고 true 리턴
+
+     // 이 밑으론 신경 x
     public int getReqCount() throws SQLException {
 
-        String sql = String.format("select count(*) from helper.request");
-        String count = "";
+        String sql = String.format("select max(req_num) as max from helper.request");
+        String num = "";
 
         ResultSet rs = db.getResult(sql);
         while(rs.next()){
-            count = rs.getString("count(*)");
+            num = rs.getString("max");
         }
-        return Integer.parseInt(count);
-    } // 모든 의뢰 수 반환
+        return Integer.parseInt(num);
+    } // 가장 최근 생성된 의뢰 번호 반환
+
+    public boolean hasPostRequest (String id) throws  SQLException {
+
+        String sql = String.format("select req_request from helper.member where id = '%s'", id);
+
+        ResultSet rs = db.getResult(sql);
+
+        while(rs.next()){
+            if(rs.wasNull())
+                return false;
+            else
+                return true;
+        }
+        return false;
+
+    } // id를 매개변수로 받아서 등록한 의뢰가 있는지 검사. 있을경우 true, 없을경우 false
  }
 
  class request {
