@@ -273,6 +273,9 @@ public class DBControl {
         sql = String.format("update helper.member set acpt_request = null where id = '%s'", aid);
         db.getResultmodify(sql);
 
+        sql = String.format("update helper.request set end_date = curdate() where req_num = %d'", aid);
+        db.getResultmodify(sql);
+
         return true;
     } // 의뢰번호 매개변수로 받아서 의뢰테이블에서 해결여부 변경, 수락자 등록자에서 각각 수락중 등록중 의뢰 제거
 
