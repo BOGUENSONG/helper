@@ -20,7 +20,7 @@ public class BaseRestController {
 
     @RequestMapping(value = "/loginValid" , method = RequestMethod.GET) //로그인
     public boolean loginValid(@RequestParam("ID")String id, @RequestParam("PW")String pw) throws SQLException {
-        return dbc.isIdExist(id);
+        return dbc.isValidLogin(id, pw);
 
     }
 
