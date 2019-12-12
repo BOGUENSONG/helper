@@ -92,7 +92,8 @@ public class DBControl {
                 locate = "";
         }
         sql = String.format(" select * from helper.request as r join helper.member" +
-                " as m on r.requester_id = m.id and  r.is_completed = false and m.locate = '%s'", locate);
+                " as m on r.requester_id = m.id and  r.is_completed = false and m.locate = '%s'" +
+                "and r.accepted_id = null and r.requester_id != '%s'", locate, id);
 
         rs = db.getResult(sql);
 
