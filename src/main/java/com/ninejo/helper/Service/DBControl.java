@@ -302,15 +302,12 @@ public class DBControl {
      // 이 밑으론 신경 x
     public int getReqCount() throws SQLException {
 
-        String sql = String.format("select max(req_num) as max from helper.request");
+        String sql = String.format("select coalesce(max(req_num), 0) as max from helper.request");
         String num = "";
 
         ResultSet rs = db.getResult(sql);
         while(rs.next()){
-            if(rs.wasNull())
-                num = "0";
-            else
-                num = rs.getString("max");
+            num = rs.getString("max");
         }
         return Integer.parseInt(num);
     } // 가장 최근 생성된 의뢰 번호 반환
@@ -322,6 +319,7 @@ public class DBControl {
         ResultSet rs = db.getResult(sql);
 
         while(rs.next()){
+            rs.getString("req_request");
             if(rs.wasNull())
                 return false;
             else
