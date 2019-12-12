@@ -1,18 +1,14 @@
 package com.ninejo.helper.Controller;
 
 
+import com.ninejo.helper.Service.DBControl;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.ninejo.helper.Service.DBControl;
 
-import javax.servlet.http.HttpSession;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 @RestController
@@ -78,8 +74,7 @@ public class BaseRestController {
         return true;
     }
     @RequestMapping(value = "/solvedrequest" , method = RequestMethod.GET) //나의 완료된 의뢰 리턴
-    public boolean solvedRequest(@RequestParam("ID")String id)
-    {
+    public boolean solvedRequest(@RequestParam("ID")String id) throws SQLException {
         //db에서 검색해서 true나 false 리턴한다.
 
         // getSolvedRequestList (id) -> 해결했던 의뢰 list 리턴

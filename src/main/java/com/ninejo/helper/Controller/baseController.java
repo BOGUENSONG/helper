@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Controller
-@SessionAttributes("id")
 public class baseController {
     DBControl dbc = new DBControl();
 
