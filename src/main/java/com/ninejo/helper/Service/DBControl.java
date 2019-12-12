@@ -288,7 +288,7 @@ public class DBControl {
         String rid = "";
         String aid = "";
         int reward = 0;
-        
+
         String sql = String.format("select accepted_id from helper.request where req_num = %d",req_num);
         ResultSet rs = db.getResult(sql);
         while(rs.next()){
@@ -331,13 +331,17 @@ public class DBControl {
     public boolean cancelRequest (int req_num) throws SQLException {
 
         String rid = "";
-        String sql = String.format("select requester_id from helper.request where req_num = %d",req_num);
+        String aid = "";
+        String sql = String.format("select accepted_id from helper.request where req_num = %d",req_num);
         ResultSet rs = db.getResult(sql);
         while(rs.next()){
-            rid = rs.getString("requester_id");
+            aid = rs.getString("accepted_id");
         }
-        if(rid!=null)
+        if(aid!=null)
             return false;
+        sql = String.format("select requester_id from helper.request where req_num = %d",req_num);
+        rs = db.getResult(sql);
+        rid = rs.getString("requester_id");
 
         sql = String.format("update helper.member set req_request = null where id = '%s'", rid);
         db.getResultmodify(sql);
