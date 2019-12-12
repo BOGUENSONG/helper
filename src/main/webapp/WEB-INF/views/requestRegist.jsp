@@ -82,6 +82,7 @@
             success: function(data) {
                 if (data) {
                     alert("의뢰 등록 완료");
+                    location.href="/progress?id=" + getId();
                 }
                 else {
                     alert("SQL오류");

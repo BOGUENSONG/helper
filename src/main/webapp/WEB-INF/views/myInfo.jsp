@@ -129,6 +129,7 @@
             success: function(data) {
                 if (data) {
                     alert("포인트 충전완료");
+                    location.reload();
                 }
                 else {
                     alert("SQL오류");
@@ -151,6 +152,7 @@
             success: function(data) {
                 if (data) {
                     alert("포인트 반납완료");
+                    location.reload();
                 }
                 else {
                     alert("SQL오류");

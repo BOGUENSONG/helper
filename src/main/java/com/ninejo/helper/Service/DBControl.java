@@ -92,7 +92,8 @@ public class DBControl {
                 locate = "";
         }
         sql = String.format(" select * from helper.request as r join helper.member" +
-                " as m on r.requester_id = m.id and  r.is_completed = false and m.locate = '%s'", locate);
+                " as m on r.requester_id = m.id and  r.is_completed = false and m.locate = '%s'" +
+                "and r.accepted_id is null and r.requester_id != '%s'", locate, id);
 
         rs = db.getResult(sql);
 
@@ -311,10 +312,10 @@ public class DBControl {
         sql = String.format("update helper.member set point = point - %d where id = '%s'", reward, rid);
         db.getResultmodify(sql);
 
-        sql = String.format("update helper.member set req_request = null where id = '%s'", rid);
+        sql = String.format("update helper.member set req_request is null where id = '%s'", rid);
         db.getResultmodify(sql);
 
-        sql = String.format("update helper.member set acpt_request = null where id = '%s'", aid);
+        sql = String.format("update helper.member set acpt_request is null where id = '%s'", aid);
         db.getResultmodify(sql);
 
         sql = String.format("update helper.request set end_date = curdate() where req_num = %d'", aid);
@@ -334,7 +335,7 @@ public class DBControl {
         if(rid!=null)
             return false;
 
-        sql = String.format("update helper.member set req_request = null where id = '%s'", rid);
+        sql = String.format("update helper.member set req_request is null where id = '%s'", rid);
         db.getResultmodify(sql);
 
         sql = String.format("delete from helper.request where req_num = %d;",req_num);
