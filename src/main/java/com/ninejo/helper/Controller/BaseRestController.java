@@ -30,7 +30,7 @@ public class BaseRestController {
             return false;
         }
         else {
-            dbc.resister(id, pw, pn);
+            dbc.resister(id, pw, pn, "locate");
             return true;
         }
         // isIdExist -> 사용 이미 존재시 알림 출력
