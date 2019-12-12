@@ -319,6 +319,7 @@ public class DBControl {
         ResultSet rs = db.getResult(sql);
 
         while(rs.next()){
+            rs.getString("req_request");
             if(rs.wasNull())
                 return false;
             else
