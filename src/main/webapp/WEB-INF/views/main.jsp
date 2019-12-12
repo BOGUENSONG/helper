@@ -62,7 +62,7 @@
 <%--    <a>위치:<c:out value="${location}"/> </a>--%>
 </div>
 
-<img src="/resources/img/test1.png">
+<img src="http://localhost:1234/src/main/webapp/resources/img/test1.png">
 
 <div class="button">
     <input type="button" value="현재 진행중인 의뢰" onclick="goProgressingRequest()">

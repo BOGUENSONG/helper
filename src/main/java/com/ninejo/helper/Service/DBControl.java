@@ -42,10 +42,10 @@ public class DBControl {
             return true;
     } // id를 매개변수로 받아서 해당 id가 존재할 경우 true 반환
 
-    public void resister (String id, String password, String phoneNumber) throws  SQLException{
+    public void resister (String id, String password, String phoneNumber, String locate) throws  SQLException{
 
-        String sql = String.format(" insert into helper.member (id, password, phone_number) " +
-                "values ('%s', '%s', '%s')", id, password, phoneNumber);
+        String sql = String.format(" insert into helper.member (id, password, phone_number, locate) " +
+                "values ('%s', '%s', '%s, %s)", id, password, phoneNumber, locate);
 
         db.getResultmodify(sql);
     } // id, pw, pn 매개변수로 받아서 db에 저장
