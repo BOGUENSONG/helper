@@ -3,11 +3,15 @@ package com.ninejo.helper.Controller;
 
 import com.ninejo.helper.Service.DBControl;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -106,5 +110,9 @@ public class BaseRestController {
         //db에서 검색해서 true나 false 리턴한다.
 
         return false;
+    }
+    @RequestMapping(value = "/accept") //내정보
+    public boolean accept(@RequestParam("ID") String id ,@RequestParam("req_n") int reqn ) throws SQLException {
+        return dbc.acceptRequest(id, reqn);
     }
 }

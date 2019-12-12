@@ -8,10 +8,59 @@
     <title> HELPER :: 의뢰등록 </title>
     <style type="text/css">
         <%--        스타일 추가--%>
+        h1{
+
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid black;
+        }
+        #prevButton{
+            background-color: black;
+            color:white;
+            position:absolute;
+            top:0;
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+        .formWrap{
+            text-align: center;
+            margin-top : 40px;
+
+        }
+        .formWrap>input , .formWrap>textarea{
+            width: 80%;
+        }
+
+        textarea{
+            height: 200px;
+        }
+
+        .buttonWrap{
+            text-align:center;
+            margin-top: 40px;
+        }
+        .buttonWrap>input{
+            padding : 20px;
+            width: 40%;
+            background-color: black;
+            color: white;
+        }
+
+        .buttonWrap>input:hover{
+            cursor:pointer;
+            background-color: white;
+            color: black;
+        }
+
     </style>
 </head>
 <body>
 <script>
+    function gotoprev(){
+        history.back();
+    }
+
     function getId() {
         var params = location.search.substr(location.search.indexOf("?") + 1);
         var sval = "";
@@ -54,13 +103,14 @@
     }
 </script>
 <h1> HELPER :: 의뢰등록 </h1>
-<div> 폼 div
-<input type="text" placeholder="제목" id="regTitle">
-    <input type="number" placeholder="포인트" id="regPoint">
-    <input type="text" placeholder="장소" id="regPlace">
-    <textarea placeholder="여기에 상세내용을 입력하세요" id="regTextarea"></textarea>
+<input type="button" value="《" id="prevButton" onclick="gotoprev()">
+<div >
+    <div class="formWrap"><input type="text" placeholder="제목" id="regTitle"></div>
+    <div class="formWrap"><input type="number" placeholder="포인트" id="regPoint"></div>
+    <div class="formWrap"><input type="text" placeholder="장소" id="regPlace"></div>
+    <div class="formWrap"><textarea placeholder="여기에 상세내용을 입력하세요" id="regTextarea"></textarea></div>
 </div>
-<div>
+<div class="buttonWrap">
     <input type="button" value="확인" onclick="requestRegistOK()">
     <input type="button" value="취소" onclick="requestRegistCancel()">
 </div>

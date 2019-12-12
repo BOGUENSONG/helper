@@ -8,23 +8,80 @@
     <title> HELPER :: 현재 진행중 </title>
     <style type="text/css">
         <%--        스타일 추가--%>
+        h1{
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid black;
+        }
+        #prevButton{
+            background-color: black;
+            color:white;
+            position:absolute;
+            top:0;
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+        .modal1, .modal2{
+            display: none;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            margin: 15%;
+            width: 70%;
+            height: 80%;
+            border: 3px double black;
+            background-color: white;
+            text-align: center;
+
+        }
+        .thumbnail{
+            border : 2px solid black;
+            min-height: 20px;
+            margin : 50px;
+        }
+        .subtitle{
+            text-align: center;
+            font-size: 20px;
+            margin-top : 40px;
+        }
+
+        .xbutton{
+            background-color: black;
+            color: white;
+        }
+        .xbuttonWrap{
+            text-align: right;
+        }
+
+        #requestComplete{
+            background-color: blue;
+            color: white;
+        }
+        #requestCancel{
+            background-color: red;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
 <h1> HELPER :: 현재 진행중 </h1>
+<input type="button" value="《" id="prevButton" onclick="gotoprev()">
 <div>
-    -- 메인 --
     <div>
-        <div>내가 요청한 의뢰</div>
-        <div onclick="openModal1()"><c:out value="${rlist.title}"/></div>
+        <div class="subtitle">내가 요청한 의뢰</div>
+        <div class="thumbnail" onclick="openModal1()"><c:out value="${rlist.title}"/></div>
     </div>
     <div>
-        <div>내가 해결중인 의뢰</div>
-        <div onclick="openModal2()"><c:out value="${alist.title}"/></div>
+        <div class="subtitle">내가 해결중인 의뢰</div>
+        <div class="thumbnail" onclick="openModal2()"><c:out value="${alist.title}"/></div>
     </div>
 </div>
+
 <div class="modal1">
-    -- 내가 요청한 의뢰 모달 --
+    <div class="xbuttonWrap"><input type="button" value="x" class="xbutton" onclick="closeModal1()"></div>
+    -- 내가 요청한 의뢰 --
     <div>
         <p> 제목: <c:out value="${rlist.title}"/> </p>
         <p> 기간: <c:out value="${rlist.start_date}"/> </p>
@@ -33,11 +90,15 @@
         <p> 내용 : <c:out value="${rlist.contents}"/> </p>
     </div>
     <div>
-        <input type="button" value="닫기" onclick="closeModal1()">
+        <input type="button" value="해결완료" onclick="requestComplete()" id="requestComplete">
+        <input type="button" value="요청취소" onclick="requestCancel()" id="requestCancel">
     </div>
 </div>
 <div class="modal2">
-    -- 내가 해결중인 의뢰 모달 --
+    <div class="xbuttonWrap"><input type="button" value="x" class="xbutton" onclick="closeModal2()">
+
+    </div>
+    -- 내가 해결중인 의뢰 --
     <div>
         <p> 제목: <c:out value="${alist.title}"/> </p>
         <p> 기간: <c:out value="${alist.start_date}"/> </p>
@@ -45,12 +106,34 @@
         <p> 해결자 번호: <c:out value="${pn}"/> </p>
         <p> 내용 : <c:out value="${alist.contents}"/> </p>
     </div>
-    <div> <input type="button" value="해결완료" onclick="requestComplete()">
-        <input type="button" value="닫기" onclick="closeModal1()">
-    </div>
 </div>
 </body>
 <script>
+
+    function openModal1(){
+
+        $('.modal1').show();
+    }
+    function openModal2(){
+        $('.modal2').show();
+    }
+
+    function closeModal1(){
+        $('.modal1').hide();
+    }
+    function closeModal2(){
+        $('.modal2').hide();
+    }
+    function gotoprev(){
+        history.back();
+    }
+    // 이상 버튼관련 함수들 ////////////////////////////////
+    function requestComplete(){
+        //요청 완료를 누르면 진행되는 함수
+    }
+    function requestCancel(){
+        //요청 취소를 누르면 진행되는 함수
+    }
     function getId() {
         var params = location.search.substr(location.search.indexOf("?") + 1);
         var sval = "";
