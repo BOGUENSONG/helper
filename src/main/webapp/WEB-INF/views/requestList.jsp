@@ -20,9 +20,67 @@
             text-align: center;
         }
         <%--        스타일 추가--%>
+        h1{
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid black;
+        }
+        #prevButton{
+            background-color: black;
+            color:white;
+            position:absolute;
+            top:0;
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+    /* 닫기버튼*/
+        #xbutton{
+            background-color: black;
+            color: white;
+        }
+        #xbuttonWrap{
+            text-align: right;
+        }
+    /*    리스트 스타일*/
+        .requestList{
+            border : 5px double black;
+        }
+        .listpoint , .liststart{
+            float: right;
+        }
+        .listTitle{
+            font-size: 30px;
+        }
+        .secretInfo{
+            display:none;
+        }
+
     </style>
 </head>
 <script>
+    function acceptbtn(){
+        //수락하는 함수
+        var requestID = $('#requesterid').html();
+    }
+    function gotoprev(){
+        history.back();
+    }
+    function closemodal(){
+        $('.modal').children('.secretInfo').remove();
+        $('.modal').hide();
+    }
+    $(document).ready(function(){
+
+        $('.requestList').click(function(){
+            $('.modal').show();
+            var node = $(this).children('.secretInfo').clone();
+            $('.modal').append(node);
+            $('.modal').children('.secretInfo').show();
+
+        });
+
+    })
     var modal = document.getElementsByClassName('modal');
     function getId() {
         var params = location.search.substr(location.search.indexOf("?") + 1);
@@ -34,26 +92,7 @@
         }
         return sval;
     }
-    function modalOn(req_num, requester_id, reward, title, start_date, locate, contents) {
-        var nn = document.createElement("p"); //아이디
-        nn.setAttribute("id","id");
-        nn.innerText = "아이디 : " + requester_id;
-        modal.appendChild(nn);
-        var ti= document.createElement("p"); //제목
-        ti.setAttribute("id","title");
-        ti.innerText = "제목 : " + title;
-        modal.appendChild(ti);
-        var ct = document.createElement("p"); //내욕
-        ct.setAttribute("id","contents");
-        ct.innerText = "내용 : " + contents;
-        modal.appendChild(ct);
-        $('.modal').show();
-    }
-    function modalOff() {
-        var pf = document.getElementById("mpopfile");
-        modal2.removeChild(pf);
-        $('.modal').hide();
-    }
+
 
             /*r.put("req_num", rs.getInt("req_num"));
             r.put("requester_id", rs.getString("requester_id"));
@@ -72,21 +111,37 @@
 </script>
 <body>
 <h1> HELPER :: 의뢰목록 </h1>
+<input type="button" value="《" id="prevButton" onclick="gotoprev()">
 <div>--- 리스트 ---</div>
-<div>    씨발</div>
 
 <c:forEach items = "${list}" var="item" varStatus = "status">
-    <div id="<c:out value="${item.req_num}"/>",onclick="modalOn(<c:out value="${item.req_num}"/>, <c:out value="${item.requester_id}"/>
-             ,<c:out value="${item.reward}"/> ,<c:out value="${item.title}"/>, <c:out value="${item.start_date}"/>
-            ,<c:out value="${item.locate}"/> ,<c:out value="${item.contents}"/>)"><div><c:out value="${item.title}"></c:out></div>
-    </div>
-
+ <div class="requestList" id="<c:out value="${status.index}"/>" >
+     <div><a class="listTitle"><c:out value="${item.title}"/></a> <a class="listPoint"><c:out value="${item.reward}pt"/></a> </div>
+     <div><a class="listRegion"><c:out value="${item.locate}"/> </a> <a class="listStart"><c:out value="${item.start_date}"/></a> </div>
+     <div class="secretInfo">
+         <p> 등록번호: <c:out value="${item.req_num}"/></p>
+         <p> 등록자 : <a id="requesterid"><c:out value="${item.requester_id}"/></a></p>
+         <p><c:out value="${item.reward}"/>pt</p>
+         <p><c:out value="${item.title}"/></p>
+         <p><c:out value="${item.start_date}"/></p>
+         <p><c:out value="${item.locate}"/></p>
+         내용 : <p><c:out value="${item.contents}"/></p>
+     </div>
+ </div>
 </c:forEach>
 
-<div class="modal" class="modal">
-    <button type="button" onclick="modalOff()">종료</button>
+
+<div class="modal">
+
+    <div id="xbuttonWrap"><input type="button" value="x" id="xbutton" onclick="closemodal()">
+
+    </div>
+
+    <div> <input type="button" value="수락" onclick="acceptbtn()"> <input type="button" value="취소" onclick="closemodal()"> </div>
+
 </div>
-<div>--- 모달 ---</div>
+
+
 
 </body>
 
