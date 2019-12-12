@@ -65,14 +65,14 @@ public class BaseRestController {
 
     @RequestMapping(value = "/pointadd" , method = RequestMethod.GET) //포인트충전
     public boolean pointAdd(@RequestParam("ID")String id) throws SQLException {
-        dbc.addPoint(id, 100);
+        dbc.addPoint(id, 1000);
         // addPoint <- id, 증가시킬 point
 
         return true;
     }
     @RequestMapping(value = "/pointsub" , method = RequestMethod.GET) //포인트회수
     public boolean pointSub(@RequestParam("ID")String id) throws SQLException {
-        dbc.subPoint(id, 100);
+        dbc.subPoint(id, 1000);
         // subPoint <- id, 감소시킬 point
 
         return true;

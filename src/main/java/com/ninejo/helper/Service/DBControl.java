@@ -79,13 +79,22 @@ public class DBControl {
         db.getResultmodify(sql);
     } // id, point 매개변수로 받아서 해당 id의 포인트 값 감소
 
-    public ArrayList<HashMap<String, Object>> getRequestList () throws SQLException {
+    public ArrayList<HashMap<String, Object>> getRequestList (String id) throws SQLException {
 
         ArrayList<HashMap<String, Object>> rlist = new ArrayList<>();
+        String locate = "";
 
-        String sql = String.format("select * from helper.request where is_completed = false");
-
+        String sql = String.format("select locate from helper.member where id = '%s'", id);
         ResultSet rs = db.getResult(sql);
+        while(rs.next()) {
+            locate = rs.getString("locate");
+            if(rs.wasNull())
+                locate = "";
+        }
+        sql = String.format(" select * from helper.request as r join helper.member" +
+                " as m on r.requester_id = m.id and  r.is_completed = false and m.locate = '%s'", locate);
+
+        rs = db.getResult(sql);
 
         while(rs.next()){
             HashMap<String, Object> r = new HashMap<>();
