@@ -40,9 +40,43 @@
         .myInfo{
 
         }
+        .modifyWrap{
+            margin-top: 40px;
+            text-align:center;
+        }
+        .modifyWrap>div>input{
+            width: 60%;
+        }
+
+
+
+        .pointWrap{
+            margin-top :40px;
+            text-align: center;
+        }
+        .pointWrap>input{
+            width: 40%;
+        }
+        .solvelist, .buttonWrap{
+            text-align:center;
+            margin-top: 10px;
+        }
+        .solvelist>input, .buttonWrap>input{
+            width: 80%;
+        }
+        body{
+
+        }
+
     /*    내 정보*/
         #myId{
             font-size : 20px;
+            background-color: black;
+            color: lightyellow;
+        }
+        #myPoint{
+            background-color: black;
+            color: lightyellow;
         }
     </style>
 </head>
@@ -142,24 +176,27 @@
 <h1> HELPER :: 내 정보 </h1>
 <input type="button" value="《" id="prevButton" onclick="gotoprev()">
 <div class="myInfo">
-    <div id="myId"><c:out value="${mlist.id}"/></div>
-    <div id="myPN"><c:out value="${mlist.phone_number}"/></div>
-    <div id="myPoint"><c:out value="${mlist.point}"/> point</div>
+    <div id="myId"> ■ <c:out value="${mlist.id}"/></div>
+    <div id="myPN">내 번호 : <c:out value="${mlist.phone_number}"/></div>
+    <div id="myPoint">My Point [ <c:out value="${mlist.point}"/> \]</div>
     <div id="myLocation">내 위치 : <c:out value="${mlist.locate}"/></div>
 </div>
-
-<div >
-    <div>새 비밀번호: <input type="text" id="newPW"></div>
-    <div>새 전화번호: <input type="text" placeholder="ex) 01012341234" id="newPN"></div>
-</div>
-<div><input type="button" value="변경" onclick="modifyInfo()"></div>
-
 <div>
+    <div class="modifyWrap">
+        <div>새 비밀번호: <input type="text" id="newPW"></div>
+        <div>새 전화번호: <input type="text" placeholder="ex) 01012341234" id="newPN"></div>
+    </div>
+
+
+</div>
+
+<div class="buttonWrap"><input type="button" value="변경" onclick="modifyInfo()"></div>
+<div class="pointWrap">
     <input type="button" value="포인트 충전" onclick="pointAdd()">
     <input type="button" value="포인트 전환" onclick="pointSub()">
-
 </div>
-<div> <input type="button" value="완료 의뢰 목록" onclick="openmodal()"> </div>
+
+<div class="solvelist"> <input type="button" value="완료 의뢰 목록" onclick="openmodal()"> </div>
 
 <div class="modal">
     <div id="xbuttonWrap"><input type="button" value="x" id="xbutton" onclick="closemodal()"></div>

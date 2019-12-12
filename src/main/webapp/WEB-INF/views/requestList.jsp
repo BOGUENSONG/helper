@@ -130,7 +130,6 @@
 <body>
 <h1> HELPER :: 의뢰목록 </h1>
 <input type="button" value="《" id="prevButton" onclick="gotoprev()">
-
 <c:forEach items = "${list}" var="item" varStatus = "status">
  <div class="requestList" id="<c:out value="${status.index}"/>" >
      <div><a class="listTitle"><c:out value="${item.title}"/></a> <a class="listPoint"><c:out value="${item.reward}pt"/></a> </div>
