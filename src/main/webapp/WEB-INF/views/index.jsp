@@ -11,6 +11,7 @@
         h1{
             margin-top: 100px;
             width: 100%;
+            font-size: 50px;
             text-align: center;}
         .modal{
             display: none;
@@ -23,8 +24,9 @@
             border: 3px double black;
             background-color: white;
             text-align: center;
-
         }
+
+
         #loginID,#loginPW,#loginBut{
             width: 80%;
             height: 30px;
@@ -142,7 +144,7 @@ body{
     }
 
 </script>
-    <h1> HELPER :: HELPER</h1>
+    <h1>HELPER</h1>
 <div class="main">
     <div class="idpw"><input type="text" id="loginID" placeholder=" 아이디"></div>
     <div class="idpw"><input type="password" id="loginPW" placeholder=" 비밀번호"></div>

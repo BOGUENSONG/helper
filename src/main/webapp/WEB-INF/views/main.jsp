@@ -32,6 +32,17 @@
             color: black;
         }
 
+        #prevButton{
+            background-color: white;
+            color:black;
+            position:absolute;
+            float:right;
+            top:0;
+            right: 0;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
 
 
     </style>
@@ -79,6 +90,7 @@
 </script>
 
 <h1> HELPER :: 메인화면 </h1>
+<input type="button" value="로그아웃" id="prevButton" onclick="logout()">
 <%--<div> <a>id: <c:out value="${id}"/></a>--%>
 <%--    <a>보유포인트: <c:out value="${point}"/> </a>--%>
 <%--    <a>위치:<c:out value="${location}"/> </a>--%>
@@ -91,7 +103,6 @@
     <div > <input type="button" value="내 정보 관리" onclick="goMyInfo()" class="button"> </div>
     <div > <input type="button" value="의뢰 등록" onclick="goRegistRequest()" class="button"> </div>
     <div > <input type="button" value="의뢰 목록" onclick="goRequestList()" class="button"> </div>
-    <div > <input type="button" value="로그아웃" onclick="logout()" class="button"> </div>
 </div>
 </body>
 
