@@ -135,6 +135,7 @@
     id : <c:out value="${mlist.id}"/>
     전화번호 : <c:out value="${mlist.phone_number}"/>
     내 포인트 : <c:out value="${mlist.point}"/>
+    내 위치 : <c:out value="${mlist.locate}"/>
 </div>
 
 <div>
@@ -157,7 +158,6 @@
             <p>"<c:out value="${item.reward}"/>"</p>
             <p>"<c:out value="${item.locate}"/>"</p>
         </div>
-
     </c:forEach>
 </div>
 </body>

@@ -16,37 +16,38 @@
     -- 메인 --
     <div>
         <div>내가 요청한 의뢰</div>
-        <div><c:out value="${Myrequest}"/>리스트1</div>
+        <div onclick="openModal1()"><c:out value="${rlist.title}"/></div>
     </div>
     <div>
         <div>내가 해결중인 의뢰</div>
-        <div><c:out value="${Mysolve}"/>리스트2</div>
+        <div onclick="openModal2()"><c:out value="${alist.title}"/></div>
     </div>
 </div>
-<div>
+<div class="modal1">
     -- 내가 요청한 의뢰 모달 --
-    <div> 닫기버튼 </div>
     <div>
-        <p> 제목: <c:out value="${title}"/> </p>
-        <p> 기간: <c:out value="${date}"/> </p>
-        <p> 포인트: <c:out value="${point}"/> </p>
+        <p> 제목: <c:out value="${rlist.title}"/> </p>
+        <p> 기간: <c:out value="${rlist.start_date}"/> </p>
+        <p> 포인트: <c:out value="${rlist.reward}"/> </p>
         <p> 해결자 번호: <c:out value="${pn}"/> </p>
-        <p> 내용 : <c:out value="${text}"/> </p>
+        <p> 내용 : <c:out value="${rlist.contents}"/> </p>
     </div>
-    <div> <input type="button" value="해결" onclick="">
-        <input type="button" value="요청취소" onclick="">
+    <div>
+        <input type="button" value="닫기" onclick="closeModal1()">
     </div>
 </div>
-<div>
+<div class="modal2">
     -- 내가 해결중인 의뢰 모달 --
-</div>
-<div> 닫기버튼 </div>
-<div>
-    <p> 제목: <c:out value="${title}"/> </p>
-    <p> 기간: <c:out value="${date}"/> </p>
-    <p> 포인트: <c:out value="${point}"/> </p>
-    <p> 해결자 번호: <c:out value="${pn}"/> </p>
-    <p> 내용 : <c:out value="${text}"/> </p>
+    <div>
+        <p> 제목: <c:out value="${alist.title}"/> </p>
+        <p> 기간: <c:out value="${alist.start_date}"/> </p>
+        <p> 포인트: <c:out value="${alist.reward}"/> </p>
+        <p> 해결자 번호: <c:out value="${pn}"/> </p>
+        <p> 내용 : <c:out value="${alist.contents}"/> </p>
+    </div>
+    <div> <input type="button" value="해결완료" onclick="requestComplete()">
+        <input type="button" value="닫기" onclick="closeModal1()">
+    </div>
 </div>
 </body>
 <script>
@@ -61,47 +62,6 @@
         return sval;
     }
 
-    function myrequsting(){ //내가 요청한 의뢰
-        $.ajax({
-            url: "/myrequesting",
-            type: "get",
-            dataType: "json",
-            contentType:'application/json; charset=utf-8',
-            data: {"ID":getId()},
-            success: function(data) {
-                if (data) {
-
-                }
-                else {
-                    alert("SQL오류");
-                }
-            },
-            error:function(error) {
-                alert("서버 오류");
-            }
-        });
-    }
-
-    function mysolving(){ //내가 해결중인 의뢰
-        $.ajax({
-            url: "/mysolving",
-            type: "get",
-            dataType: "json",
-            contentType:'application/json; charset=utf-8',
-            data: {"ID": getId()},
-            success: function(data) {
-                if (data) {
-
-                }
-                else {
-                    alert("SQL오류");
-                }
-            },
-            error:function(error) {
-                alert("서버 오류");
-            }
-        });
-    }
 
 </script>
 
