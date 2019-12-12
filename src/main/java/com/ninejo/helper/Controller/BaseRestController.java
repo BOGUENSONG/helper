@@ -44,8 +44,7 @@ public class BaseRestController {
     @RequestMapping(value = "/changepw" , method = RequestMethod.GET) //내정보 변경
     public boolean changepw(@RequestParam("ID")String id, @RequestParam("PW")String pw, @RequestParam("PN")String pn) throws SQLException {
         if (pw == "" && pn == "") {
-            dbc.changeInfo(id, pw, pn);
-            return true;
+            return false;
         }
         else if (pw == "") {
             dbc.changeInfo(id, pw, pn);
