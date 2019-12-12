@@ -46,7 +46,7 @@ public class baseController {
 
     @RequestMapping(value = "/requestList") //의뢰 목록
     public String requestList(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException, SQLException {
-        ArrayList rlist = dbc.getRequestList();
+        ArrayList rlist = dbc.getRequestList(id);
         model.addAttribute("list",rlist);
         return "requestList";
     }
