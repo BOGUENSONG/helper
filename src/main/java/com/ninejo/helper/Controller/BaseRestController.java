@@ -88,10 +88,7 @@ public class BaseRestController {
         else {
             return false;
         }
-
         // postRequest <- 등록자id, 보상point, 제목, 장소, 내용 -> 이미 등록했으면 false, 아니면 수행 후 true 리턴
-
-
     }
     @RequestMapping(value = "/mysolving" , method = RequestMethod.GET) //내가 해결중인 의뢰
     public boolean mysolve(@RequestParam("ID")String id)

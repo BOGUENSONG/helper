@@ -42,6 +42,7 @@
                 alert("서버 오류");
             }
         });
+
         //확인 버튼
         // 세션의 id와 form들을 보낸다
         // regTitle, regDate, regPoint, regPlace, regTextarea

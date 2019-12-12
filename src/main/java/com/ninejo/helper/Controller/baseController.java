@@ -15,6 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 public class baseController {
@@ -47,23 +48,23 @@ public class baseController {
     @RequestMapping(value = "/requestList") //의뢰 목록
     public String requestList(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException, SQLException {
         ArrayList rlist = dbc.getRequestList();
-        ArrayList<Integer> test = new ArrayList<>();
-        test.add(1);
-        test.add(2);
-        test.add(10);
-        //db에서 검색해서 true나 false 리턴한다.
         model.addAttribute("list",rlist);
-        model.addAttribute("test",test);
         return "requestList";
     }
 
     @RequestMapping(value = "/progress") //현재 진행중인 의뢰목록
-    public String progress(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException{
+    public String progress(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException, SQLException {
+        HashMap rlist = dbc.getPostRequest(id); //요청중인 의뢰
+        model.addAttribute("rlist",rlist);
+        HashMap alist = dbc.getAcptRequest(id); //해결중인 의뢰
+        model.addAttribute("alist",alist);
         return "progress";
     }
 
     @RequestMapping(value = "/myInfo") //내정보
-    public String myInfo(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException{
+    public String myInfo(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException, SQLException {
+        ArrayList rlist = dbc.getSolvedRequestList(id);
+        model.addAttribute("list",rlist);
         return "myInfo";
     }
 
