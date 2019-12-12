@@ -1,5 +1,8 @@
 package com.ninejo.helper.Service;
 
+import org.springframework.data.relational.core.sql.SQL;
+
+import java.awt.*;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +10,21 @@ import java.util.ArrayList;
 
 public class DBControl {
     DBConnect db = new DBConnect();
+
+    public boolean isValidLogin (String id, String pw) throws SQLException{
+
+        String sql = String.format("select count(*) from helper.member where id = '%s' and password = '%s'", id, pw);
+        String count = "";
+
+        ResultSet rs = db.getResult(sql);
+        while(rs.next()){
+            count = rs.getString("count(*)");
+        }
+        if(count.equals("0"))
+            return false;
+        else
+            return true;
+    }
 
     public boolean isIdExist (String id) throws SQLException {
 
