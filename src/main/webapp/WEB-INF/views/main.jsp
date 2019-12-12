@@ -15,6 +15,11 @@
         .button{
             text-align: center;
         }
+        body{
+            background-image: url("/resources/img/test1.png");
+            background-size: cover;
+
+        }
 
 
     </style>
@@ -62,7 +67,7 @@
 <%--    <a>위치:<c:out value="${location}"/> </a>--%>
 </div>
 
-<img src="http://localhost:1234/src/main/webapp/resources/img/test1.png">
+
 
 <div class="button">
     <input type="button" value="현재 진행중인 의뢰" onclick="goProgressingRequest()">
