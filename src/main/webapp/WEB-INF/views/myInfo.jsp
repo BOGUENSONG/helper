@@ -67,6 +67,14 @@
         body{
 
         }
+        /* 닫기버튼*/
+        #xbutton{
+            background-color: black;
+            color: white;
+        }
+        #xbuttonWrap{
+            text-align: right;
+        }
 
     /*    내 정보*/
         #myId{
@@ -77,6 +85,10 @@
         #myPoint{
             background-color: black;
             color: lightyellow;
+        }
+        .solveitem{
+            border: 3px solid black;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -201,10 +213,8 @@
 <div class="modal">
     <div id="xbuttonWrap"><input type="button" value="x" id="xbutton" onclick="closemodal()"></div>
     <c:forEach items = "${rlist}" var="item" varStatus = "status">
-        <div><p>"<c:out value="${item.title}"/>"</p>
-            <p>"<c:out value="${item.start_date}"/>"</p>
-            <p>"<c:out value="${item.reward}"/>"</p>
-            <p>"<c:out value="${item.locate}"/>"</p>
+        <div class="solveitem"><p>의뢰 제목 : <c:out value="${item.title}"/></p>
+            <p>의뢰일: <c:out value="${item.start_date}"/></p>
         </div>
     </c:forEach>
 </div>

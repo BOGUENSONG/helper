@@ -119,7 +119,7 @@ public class DBControl {
 
         ArrayList<HashMap<String, Object>> rlist = new ArrayList<>();
 
-        String sql = String.format("select * from helper.request where is_completed = true & accepted_id = '%s'", id);
+        String sql = String.format("select * from helper.request where is_completed = true AND accepted_id = '%s'", id);
 
         ResultSet rs = db.getResult(sql);
 
