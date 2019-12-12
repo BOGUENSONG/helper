@@ -1,5 +1,6 @@
 package com.ninejo.helper.Controller;
 
+import com.ninejo.helper.Service.DBControl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 @Controller
 @SessionAttributes("id")
 public class baseController {
+    DBControl dbc = new DBControl();
 
     //주소창에 localhost:1234/ 치면 이동
     @RequestMapping(value = "/test")
@@ -39,7 +43,10 @@ public class baseController {
     }
 
     @RequestMapping(value = "/requestList") //의뢰 목록
-    public String requestList(Model model) throws IOException, SAXException, ParserConfigurationException{
+    public String requestList(Model model) throws IOException, SAXException, ParserConfigurationException, SQLException {
+        ArrayList rlist = dbc.getRequestList();
+        //db에서 검색해서 true나 false 리턴한다.
+        model.addAttribute("list",rlist);
         return "requestList";
     }
 
