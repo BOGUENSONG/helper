@@ -111,7 +111,7 @@ public class BaseRestController {
 
         return false;
     }
-    @RequestMapping(value = "/accept") //내정보
+    @RequestMapping(value = "/accept" , method = RequestMethod.GET ) //내정보
     public boolean accept(@RequestParam("ID") String id ,@RequestParam("req_n") int reqn ) throws SQLException {
         return dbc.acceptRequest(id, reqn);
     }
