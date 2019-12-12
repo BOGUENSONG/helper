@@ -52,6 +52,9 @@
             background-color: white;
             color: black;
         }
+        #point {
+            display: none;
+        }
 
     </style>
 </head>
@@ -74,36 +77,43 @@
 
     function requestRegistOK(){
         var point = $('#regPoint').val();
-        if (point <= 0){
-            alert(" 포인트는 양의 정수만 입력 가능합니다.");
-        }
-        else{
-            $.ajax({
-                url: "/requestRegistdb",
-                type: "get",
-                dataType: "json",
-                contentType:'application/json; charset=utf-8',
-                data: {"ID": getId(), "Title": $('#regTitle').val(), "Point": point, "Place": $('#regPlace').val(), "Text": $('#regTextarea').val(),},
-                success: function(data) {
-                    if (data) {
-                        alert("의뢰 등록 완료");
-                        location.href="/progress?id=" + getId();
+        var mypoint =  $('#point').val();
+        if (mypoint < point) {
+            if (point <= 0){
+                alert(" 포인트는 양의 정수만 입력 가능합니다.");
+            }
+            else{
+                $.ajax({
+                    url: "/requestRegistdb",
+                    type: "get",
+                    dataType: "json",
+                    contentType:'application/json; charset=utf-8',
+                    data: {"ID": getId(), "Title": $('#regTitle').val(), "Point": point, "Place": $('#regPlace').val(), "Text": $('#regTextarea').val(),},
+                    success: function(data) {
+                        if (data) {
+                            alert("의뢰 등록 완료");
+                            location.href="/progress?id=" + getId();
+                        }
+                        else {
+                            alert("SQL오류");
+                        }
+                    },
+                    error:function(error) {
+                        alert("서버 오류");
                     }
-                    else {
-                        alert("SQL오류");
-                    }
-                },
-                error:function(error) {
-                    alert("서버 오류");
-                }
-            });
-        }
+                });
+            }
 
 
-        //확인 버튼
-        // 세션의 id와 form들을 보낸다
-        // regTitle, regDate, regPoint, regPlace, regTextarea
-        // 등록 후 success하면  성공메세지 출력 후 바로 이전페이지로 이동
+            //확인 버튼
+            // 세션의 id와 form들을 보낸다
+            // regTitle, regDate, regPoint, regPlace, regTextarea
+            // 등록 후 success하면  성공메세지 출력 후 바로 이전페이지로 이동
+        }
+        else {
+            alert("자신의 포인트보다 더 높은수를 입력할수 없습니다.");
+        }
+
     }
     function requestRegistCancel(){
         location.href="/main?id="+ getId();
@@ -121,6 +131,9 @@
 <div class="buttonWrap">
     <input type="button" value="확인" onclick="requestRegistOK()">
     <input type="button" value="취소" onclick="requestRegistCancel()">
+</div>
+<div>
+    <a id="point"> <c:out value="${list.point}"/></a>
 </div>
 </body>
 

@@ -92,7 +92,7 @@
         <p> 제목: <c:out value="${rlist.title}"/> </p>
         <p> 기간: <c:out value="${rlist.start_date}"/> </p>
         <p> 포인트: <c:out value="${rlist.reward}"/> </p>
-        <p> 해결자 번호: <c:out value="${pn}"/> </p>
+        <p> 해결자 번호: <c:out value="${rlist.pn}"/> </p>
         <p> 내용 : <c:out value="${rlist.contents}"/> </p>
     </div>
     <div>
@@ -109,7 +109,7 @@
         <p> 제목: <c:out value="${alist.title}"/> </p>
         <p> 기간: <c:out value="${alist.start_date}"/> </p>
         <p> 포인트: <c:out value="${alist.reward}"/> </p>
-        <p> 해결자 번호: <c:out value="${pn}"/> </p>
+        <p> 해결자 번호: <c:out value="${alist.pn}"/> </p>
         <p> 내용 : <c:out value="${alist.contents}"/> </p>
     </div>
 </div>

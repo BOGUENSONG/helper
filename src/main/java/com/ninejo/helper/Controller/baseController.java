@@ -40,7 +40,9 @@ public class baseController {
     }
 
     @RequestMapping(value = "/requestRegist") //요청 페이지
-    public String requestRegist(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException{
+    public String requestRegist(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException, SQLException {
+        HashMap list = dbc.getMemberInfo(id);
+        model.addAttribute("list",list);
         return "requestRegist";
     }
 
