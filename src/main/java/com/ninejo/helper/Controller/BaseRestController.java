@@ -115,4 +115,10 @@ public class BaseRestController {
     public boolean accept(@RequestParam("ID") String id ,@RequestParam("req_n") int reqn ) throws SQLException {
         return dbc.acceptRequest(id, reqn);
     }
+
+    @RequestMapping(value = "/complete" , method = RequestMethod.GET ) //해결완료
+    public boolean completeR(@RequestParam("req_n") int reqn ) throws SQLException {
+        return dbc.completeRequest(reqn);
+    }
+
 }

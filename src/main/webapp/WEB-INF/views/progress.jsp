@@ -62,6 +62,9 @@
             background-color: red;
             color: white;
         }
+        #reqnumber {
+            display: none;
+        }
 
     </style>
 </head>
@@ -77,6 +80,9 @@
         <div class="subtitle">내가 해결중인 의뢰</div>
         <div class="thumbnail" onclick="openModal2()"><c:out value="${alist.title}"/></div>
     </div>
+</div>
+<div>
+    <a id="reqnumber"> <c:out value="${rlist.req_num}"/></a>
 </div>
 
 <div class="modal1">
@@ -129,6 +135,26 @@
     }
     // 이상 버튼관련 함수들 ////////////////////////////////
     function requestComplete(){
+        var requestN = $('#reqnumber').html();
+        $.ajax({
+            url: "/complete",
+            type: "get",
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: {"req_n" : requestN},
+            success: function(data) {
+                if (data) {
+                    alert("해결 완료");
+                    location.reload();
+                }
+                else {
+                    alert("SQL 오류");
+                }
+            },
+            error:function(error) {
+                alert("서버 오류");
+            }
+        });
         //요청 완료를 누르면 진행되는 함수
     }
     function requestCancel(){
