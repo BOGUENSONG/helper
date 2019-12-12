@@ -61,6 +61,9 @@
         #xbuttonWrap{
             text-align: right;
         }
+        .reg{
+            margin-bottom: 20px;
+        }
 body{
     background-image: url("/resources/img/test1.png");
     background-size: cover;
@@ -71,6 +74,10 @@ body{
 </head>
 <body>
 <script>
+
+    function closemodal(){
+        $('.modal').hide();
+    }
     function getId() {
         var params = location.search.substr(location.search.indexOf("?") + 1);
         var sval = "";
@@ -143,13 +150,28 @@ body{
 </div>
 <div class="idpw"> <input type="button" value="회원가입" onclick="registOpen()" id="registBut"> </div>
 <div class="modal">
-    <div id="xbuttonWrap"><input type="button" value="x" id="xbutton"></div>
-    <div > 회원가입 </div>
+    <div id="xbuttonWrap"><input type="button" value="x" id="xbutton" onclick="closemodal()"></div>
+    <div class="reg"> 회원가입 </div>
+    <div class="reg"> 아이디   :  <input type="text" id="registID"></div>
+    <div class="reg"> 비밀번호 :  <input type="text" id="registPW"></div>
+    <div class="reg"> 전화번호 :  <input type="text" id="registPN"></div>
+    <div class="reg"> 지역 : <select name="region">
+        <option value="">지역선택</option>
+        <option value="서울특별시">서울특별시</option>
+        <option value="대전광역시">대전광역시</option>
+        <option value="부산광역시">부산광역시</option>
+        <option value="인천광역시">인천광역시</option>
+        <option value="광주광역시">광주광역시</option>
+        <option value="대구광역시">대구광역시</option>
+        <option value="울산광역시">울산광역시</option>
+        <option value="강원도">강원도</option>
+        <option value="경기도">경기도</option>
+        <option value="충청도">충청도</option>
+        <option value="전라도">전라도</option>
+        <option value="경상도">강원도</option>
+        <option value="제주도">제주도</option>
 
-
-    <div> 아이디   :  <input type="text" id="registID"></div>
-    <div> 비밀번호 :  <input type="text" id="registPW"></div>
-    <div> 전화번호 :  <input type="text" id="registPN"></div>
+    </select></div>
 
     <div> <input type="button" value="확인" onclick="registValidation()"> </div>
 </div>
