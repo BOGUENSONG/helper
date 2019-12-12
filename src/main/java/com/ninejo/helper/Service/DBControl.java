@@ -118,7 +118,6 @@ public class DBControl {
     public ArrayList<HashMap<String, Object>> getSolvedRequestList (String id) throws SQLException {
 
         ArrayList<HashMap<String, Object>> rlist = new ArrayList<>();
-
         String sql = String.format("select * from helper.request where is_completed = true AND accepted_id = '%s'", id);
 
         ResultSet rs = db.getResult(sql);
@@ -163,7 +162,9 @@ public class DBControl {
         while(rs.next()){
             r.put("req_num", rs.getInt("req_num"));
             r.put("requester_id", rs.getString("requester_id"));
-            r.put("accepted_id", rs.getString("accepted_id"));
+            String aid = rs.getString("accepted_id");
+            r.put("accepted_id", aid);
+            r.put("pn", getPhoneNumber(aid));
             r.put("reward", rs.getInt("reward"));
             r.put("title", rs.getString("title"));
             r.put("start_date", rs.getDate("start_date"));
@@ -197,7 +198,9 @@ public class DBControl {
 
         while(rs.next()){
             r.put("req_num", rs.getInt("req_num"));
-            r.put("requester_id", rs.getString("requester_id"));
+            String rid = rs.getString("requester_id");
+            r.put("requester_id", rid);
+            r.put("pn", getPhoneNumber(rid));
             r.put("accepted_id", rs.getString("accepted_id"));
             r.put("reward", rs.getInt("reward"));
             r.put("title", rs.getString("title"));
