@@ -36,6 +36,14 @@
             text-align: center;
 
         }
+
+        .myInfo{
+
+        }
+    /*    내 정보*/
+        #myId{
+            font-size : 20px;
+        }
     </style>
 </head>
 <body>
@@ -131,24 +139,25 @@
 </script>
 <h1> HELPER :: 내 정보 </h1>
 <input type="button" value="《" id="prevButton" onclick="gotoprev()">
-<div>
-    id : <c:out value="${mlist.id}"/>
-    전화번호 : <c:out value="${mlist.phone_number}"/>
-    내 포인트 : <c:out value="${mlist.point}"/>
-    내 위치 : <c:out value="${mlist.locate}"/>
+<div class="myInfo">
+    <div id="myId"><c:out value="${mlist.id}"/></div>
+    <div id="myPN"><c:out value="${mlist.phone_number}"/></div>
+    <div id="myPoint"><c:out value="${mlist.point}"/> point</div>
+    <div id="myLocation">내 위치 : <c:out value="${mlist.locate}"/></div>
 </div>
 
-<div>
-    새 비밀번호: <input type="text" id="newPW">
-    새 전화번호: <input type="text" placeholder="ex) 01012341234" id="newPN">
-    <input type="button" value="변경" onclick="modifyInfo()">
+<div >
+    <div>새 비밀번호: <input type="text" id="newPW"></div>
+    <div>새 전화번호: <input type="text" placeholder="ex) 01012341234" id="newPN"></div>
 </div>
+<div><input type="button" value="변경" onclick="modifyInfo()"></div>
 
 <div>
     <input type="button" value="포인트 충전" onclick="pointAdd()">
     <input type="button" value="포인트 전환" onclick="pointSub()">
-    <input type="button" value="완료 의뢰 목록" onclick="openmodal()">
+
 </div>
+<div> <input type="button" value="완료 의뢰 목록" onclick="openmodal()"> </div>
 
 <div class="modal">
     <div id="xbuttonWrap"><input type="button" value="x" id="xbutton" onclick="closemodal()"></div>

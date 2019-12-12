@@ -112,7 +112,6 @@
 <body>
 <h1> HELPER :: 의뢰목록 </h1>
 <input type="button" value="《" id="prevButton" onclick="gotoprev()">
-<div>--- 리스트 ---</div>
 
 <c:forEach items = "${list}" var="item" varStatus = "status">
  <div class="requestList" id="<c:out value="${status.index}"/>" >
