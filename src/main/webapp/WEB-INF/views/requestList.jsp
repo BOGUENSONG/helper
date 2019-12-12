@@ -7,35 +7,23 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 의뢰목록 </title>
     <style type="text/css">
-        .modal {
+        .modal{
             display: none;
             position: fixed;
             z-index: 1;
-            left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.8);
-        }
-        .modal-content {
-            color: black;
-            text-align: center;
-            background-color: #fefefe;
-            margin :15%;
+            margin: 15%;
             width: 70%;
-            height: auto;
-            border: 3px solid #888;
-            border-radius: 10px;
-            font-size: 12px;
+            height: 80%;
+            border: 3px double black;
+            background-color: white;
+            text-align: center;
         }
         <%--        스타일 추가--%>
     </style>
 </head>
 <script>
-    var modal1 = document.getElementById('Modal1');
-    var modal2 = document.getElementById('Modal2');
+    var modal = document.getElementsByClassName('modal');
     function getId() {
         var params = location.search.substr(location.search.indexOf("?") + 1);
         var sval = "";
@@ -46,17 +34,25 @@
         }
         return sval;
     }
-    function modalOn(req_num, requester_id, accepted_id, reward, title, start_date, end_date, locate, contents, is_completed) {
-        var nn = document.createElement("p"); //공고번호
-        nn.setAttribute("id","mnoticeNo");
+    function modalOn(req_num, requester_id, reward, title, start_date, locate, contents) {
+        var nn = document.createElement("p"); //아이디
+        nn.setAttribute("id","id");
         nn.innerText = "아이디 : " + requester_id;
-        modal2.appendChild(nn);
-        modal1.style.display = "block";
+        modal.appendChild(nn);
+        var ti= document.createElement("p"); //제목
+        ti.setAttribute("id","title");
+        ti.innerText = "제목 : " + title;
+        modal.appendChild(ti);
+        var ct = document.createElement("p"); //내욕
+        ct.setAttribute("id","contents");
+        ct.innerText = "내용 : " + contents;
+        modal.appendChild(ct);
+        $('.modal').show();
     }
     function modalOff() {
         var pf = document.getElementById("mpopfile");
         modal2.removeChild(pf);
-        modal1.style.display = "none";
+        $('.modal').hide();
     }
 
             /*r.put("req_num", rs.getInt("req_num"));
@@ -80,18 +76,15 @@
 <div>    씨발</div>
 
 <c:forEach items = "${list}" var="item" varStatus = "status">
-    <div class="<c:out value="${status.index}"/>"><div><c:out value="${item.title}"></c:out></div>
-        <div><c:out value="${item.contents}"></c:out></div></div>
-
-
-
+    <div id="<c:out value="${item.req_num}"/>",onclick="modalOn(<c:out value="${item.req_num}"/>, <c:out value="${item.requester_id}"/>
+             ,<c:out value="${item.reward}"/> ,<c:out value="${item.title}"/>, <c:out value="${item.start_date}"/>
+            ,<c:out value="${item.locate}"/> ,<c:out value="${item.contents}"/>)"><div><c:out value="${item.title}"></c:out></div>
+    </div>
 
 </c:forEach>
 
-<div id="Modal1" class="modal">
-    <div id = "Modal2" class="modal-content">
-        <button type="button" onclick="modalOff()">종료</button>
-    </div>
+<div class="modal" class="modal">
+    <button type="button" onclick="modalOff()">종료</button>
 </div>
 <div>--- 모달 ---</div>
 
