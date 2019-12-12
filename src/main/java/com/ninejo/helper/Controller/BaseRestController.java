@@ -25,12 +25,12 @@ public class BaseRestController {
     }
 
     @RequestMapping(value = "/registValid" , method = RequestMethod.GET) //회원가입
-    public boolean registValid(@RequestParam("ID")String id, @RequestParam("PW")String pw, @RequestParam("PN")String pn) throws SQLException {
+    public boolean registValid(@RequestParam("ID")String id, @RequestParam("PW")String pw, @RequestParam("PN")String pn, @RequestParam("LC")String lc) throws SQLException {
         if (dbc.isIdExist(id)) {
             return false;
         }
         else {
-            dbc.resister(id, pw, pn, "locate");
+            dbc.resister(id, pw, pn, lc);
             return true;
         }
         // isIdExist -> 사용 이미 존재시 알림 출력

@@ -99,7 +99,7 @@ body{
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: { "ID": $('#registID').val(), "PW": $('#registPW').val(),"PN" : $('#registPN').val()},
+            data: { "ID": $('#registID').val(), "PW": $('#registPW').val(),"PN" : $('#registPN').val(), "LC": $('select[name=region]').val()},
             success: function(data) {
                 if (data) {
                     location.href="/main?id=" + $('#registID').val();
