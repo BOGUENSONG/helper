@@ -336,13 +336,14 @@ public class DBControl {
         ResultSet rs = db.getResult(sql);
         while(rs.next()){
             aid = rs.getString("accepted_id");
-            if(rs.wasNull())
+            if(!rs.wasNull())
                 return false;
         }
         sql = String.format("select requester_id from helper.request where req_num = %d",req_num);
         rs = db.getResult(sql);
-        rid = rs.getString("requester_id");
-
+        while(rs.next()) {
+            rid = rs.getString("requester_id");
+        }
         sql = String.format("update helper.member set req_request = null where id = '%s'", rid);
         db.getResultmodify(sql);
 
