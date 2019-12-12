@@ -136,7 +136,7 @@ public class DBControl {
         int num = 0;
         HashMap<String, Object> r = new HashMap<>();
 
-        String sql = String.format("select req_request from helper.member where id = '%s'");
+        String sql = String.format("select req_request from helper.member where id = '%s'", id);
 
         ResultSet rs = db.getResult(sql);
 
@@ -171,7 +171,7 @@ public class DBControl {
         int num = 0;
         HashMap<String, Object> r = new HashMap<>();
 
-        String sql = String.format("select acpt_request from helper.member where id = '%s'");
+        String sql = String.format("select acpt_request from helper.member where id = '%s'", id);
 
         ResultSet rs = db.getResult(sql);
 
