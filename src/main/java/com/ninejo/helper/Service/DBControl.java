@@ -292,9 +292,9 @@ public class DBControl {
         String sql = String.format("select accepted_id from helper.request where req_num = %d",req_num);
         ResultSet rs = db.getResult(sql);
         while(rs.next()){
+            aid = rs.getString("accepted_id");
             if(rs.wasNull())
                 return false;
-            aid = rs.getString("accepted_id");
         }
 
        sql = String.format("update helper.request set is_completed = true where req_num = %d",req_num);
@@ -336,9 +336,9 @@ public class DBControl {
         ResultSet rs = db.getResult(sql);
         while(rs.next()){
             aid = rs.getString("accepted_id");
+            if(rs.wasNull())
+                return false;
         }
-        if(aid!=null)
-            return false;
         sql = String.format("select requester_id from helper.request where req_num = %d",req_num);
         rs = db.getResult(sql);
         rid = rs.getString("requester_id");
