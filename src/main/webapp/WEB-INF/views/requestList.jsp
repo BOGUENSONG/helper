@@ -21,7 +21,7 @@
         }
         return sval;
     }
-    var id = 'id';
+
 
     //현재 세션에 저장된 id값
 </script>

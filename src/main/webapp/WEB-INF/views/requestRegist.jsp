@@ -22,14 +22,14 @@
         }
         return sval;
     }
-    var id = 'id';//현재 세션에 저장된 id값
+
     function requestRegistOK(){
         $.ajax({
             url: "/requestRegistdb",
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": id, "Title": $('#regTitle').val(), "Point": $('#regPoint').val(), "Place": $('#regPlace').val(), "Text": $('#regTextarea').val(),},
+            data: {"ID": getId(), "Title": $('#regTitle').val(), "Point": $('#regPoint').val(), "Place": $('#regPlace').val(), "Text": $('#regTextarea').val(),},
             success: function(data) {
                 if (data) {
                     alert("의뢰 등록 완료");
