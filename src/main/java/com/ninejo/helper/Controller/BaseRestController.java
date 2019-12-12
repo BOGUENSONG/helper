@@ -121,4 +121,9 @@ public class BaseRestController {
         return dbc.completeRequest(reqn);
     }
 
+    @RequestMapping(value = "/cancel" , method = RequestMethod.GET ) //취소
+    public boolean cancelR(@RequestParam("req_n") int reqn ) throws SQLException {
+        return dbc.cancelRequest(reqn);
+    }
+
 }
