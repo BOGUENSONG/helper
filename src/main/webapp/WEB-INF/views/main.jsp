@@ -69,8 +69,13 @@
     function goRequestList(){
         location.href="/requestList?id="+ getId();
         //의뢰 목록 페이지로 이동
-
     }
+    function logout(){
+        location.href="/";
+        //의뢰 목록 페이지로 이동
+    }
+
+
 </script>
 
 <h1> HELPER :: 메인화면 </h1>
@@ -86,6 +91,7 @@
     <div > <input type="button" value="내 정보 관리" onclick="goMyInfo()" class="button"> </div>
     <div > <input type="button" value="의뢰 등록" onclick="goRegistRequest()" class="button"> </div>
     <div > <input type="button" value="의뢰 목록" onclick="goRequestList()" class="button"> </div>
+    <div > <input type="button" value="로그아웃" onclick="logout()" class="button"> </div>
 </div>
 </body>
 
