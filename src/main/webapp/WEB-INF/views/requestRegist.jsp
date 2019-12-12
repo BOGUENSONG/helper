@@ -73,25 +73,32 @@
     }
 
     function requestRegistOK(){
-        $.ajax({
-            url: "/requestRegistdb",
-            type: "get",
-            dataType: "json",
-            contentType:'application/json; charset=utf-8',
-            data: {"ID": getId(), "Title": $('#regTitle').val(), "Point": $('#regPoint').val(), "Place": $('#regPlace').val(), "Text": $('#regTextarea').val(),},
-            success: function(data) {
-                if (data) {
-                    alert("의뢰 등록 완료");
-                    location.href="/progress?id=" + getId();
+        var point = $('#regPoint').val();
+        if (point <= 0){
+            alert(" 포인트는 양의 정수만 입력 가능합니다.");
+        }
+        else{
+            $.ajax({
+                url: "/requestRegistdb",
+                type: "get",
+                dataType: "json",
+                contentType:'application/json; charset=utf-8',
+                data: {"ID": getId(), "Title": $('#regTitle').val(), "Point": point, "Place": $('#regPlace').val(), "Text": $('#regTextarea').val(),},
+                success: function(data) {
+                    if (data) {
+                        alert("의뢰 등록 완료");
+                        location.href="/progress?id=" + getId();
+                    }
+                    else {
+                        alert("SQL오류");
+                    }
+                },
+                error:function(error) {
+                    alert("서버 오류");
                 }
-                else {
-                    alert("SQL오류");
-                }
-            },
-            error:function(error) {
-                alert("서버 오류");
-            }
-        });
+            });
+        }
+
 
         //확인 버튼
         // 세션의 id와 form들을 보낸다
@@ -107,7 +114,7 @@
 <input type="button" value="《" id="prevButton" onclick="gotoprev()">
 <div >
     <div class="formWrap"><input type="text" placeholder="제목" id="regTitle"></div>
-    <div class="formWrap"><input type="number" placeholder="포인트" id="regPoint"></div>
+    <div class="formWrap"><input type="number" placeholder="포인트" id="regPoint" min="1"></div>
     <div class="formWrap"><input type="text" placeholder="장소" id="regPlace"></div>
     <div class="formWrap"><textarea placeholder="여기에 상세내용을 입력하세요" id="regTextarea"></textarea></div>
 </div>

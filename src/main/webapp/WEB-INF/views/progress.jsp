@@ -158,6 +158,26 @@
         //요청 완료를 누르면 진행되는 함수
     }
     function requestCancel(){
+        var requestN = $('#reqnumber').html();
+        $.ajax({
+            url: "/cancel",
+            type: "get",
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: {"req_n" : requestN},
+            success: function(data) {
+                if (data) {
+                    alert("취소 완료");
+                    location.reload();
+                }
+                else {
+                    alert("이미 수락한 사람이있기때문에 취소할수없습니다.");
+                }
+            },
+            error:function(error) {
+                alert("서버 오류");
+            }
+        });
         //요청 취소를 누르면 진행되는 함수
     }
     function getId() {
