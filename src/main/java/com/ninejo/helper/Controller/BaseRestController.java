@@ -115,13 +115,4 @@ public class BaseRestController {
 
         return false;
     }
-
-    @RequestMapping(value = "/requestlist" , method = RequestMethod.GET) //의뢰목록
-    public ArrayList requestlist(@RequestParam("ID")String id) throws SQLException {
-        ArrayList rlist = dbc.getRequestList();
-
-        //db에서 검색해서 true나 false 리턴한다.
-
-        return rlist;
-    }
 }
