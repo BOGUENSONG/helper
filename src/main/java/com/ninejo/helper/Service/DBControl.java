@@ -307,7 +307,10 @@ public class DBControl {
 
         ResultSet rs = db.getResult(sql);
         while(rs.next()){
-            num = rs.getString("max");
+            if(rs.wasNull())
+                num = "0";
+            else
+                num = rs.getString("max");
         }
         return Integer.parseInt(num);
     } // 가장 최근 생성된 의뢰 번호 반환
