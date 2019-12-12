@@ -288,11 +288,20 @@ public class DBControl {
         String rid = "";
         String aid = "";
         int reward = 0;
-        String sql = String.format("update helper.request set is_completed = true where req_num = %d",req_num);
+        
+        String sql = String.format("select accepted_id from helper.request where req_num = %d",req_num);
+        ResultSet rs = db.getResult(sql);
+        while(rs.next()){
+            if(rs.wasNull())
+                return false;
+            aid = rs.getString("accepted_id");
+        }
+
+       sql = String.format("update helper.request set is_completed = true where req_num = %d",req_num);
         db.getResultmodify(sql);
 
         sql = String.format("select reward from helper.request where req_num = %d", req_num);
-        ResultSet rs = db.getResult(sql);
+         rs = db.getResult(sql);
         while(rs.next()){
             reward = rs.getInt("reward");
         }
@@ -300,11 +309,6 @@ public class DBControl {
         rs = db.getResult(sql);
         while(rs.next()){
             rid = rs.getString("requester_id");
-        }
-        sql = String.format("select accepted_id from helper.request where req_num = %d",req_num);
-        rs = db.getResult(sql);
-        while(rs.next()){
-            aid = rs.getString("accepted_id");
         }
         sql = String.format("update helper.member set point = point + %d where id = '%s'", reward, aid);
         db.getResultmodify(sql);
