@@ -44,6 +44,11 @@
             color:white;
             cursor: pointer;
         }
+body{
+    background-image: url("/resources/img/test1.png");
+    background-size: cover;
+
+}
 
 
     </style>

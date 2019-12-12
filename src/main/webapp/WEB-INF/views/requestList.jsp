@@ -80,16 +80,19 @@
 <div>    씨발</div>
 
 <c:forEach items = "${list}" var="item" varStatus = "status">
-<div><c:out value="${item.title}"></c:out>
-    <c:out value="${item.contents}"></c:out></div>
-    <div id="Modal1" class="modal">
-        <div id = "Modal2" class="modal-content">
-            <button type="button" onclick="modalOff()">종료</button>
-        </div>
-    </div>
+    <div class="<c:out value="${status.index}"/>"><div><c:out value="${item.title}"></c:out></div>
+        <div><c:out value="${item.contents}"></c:out></div></div>
+
+
+
 
 </c:forEach>
 
+<div id="Modal1" class="modal">
+    <div id = "Modal2" class="modal-content">
+        <button type="button" onclick="modalOff()">종료</button>
+    </div>
+</div>
 <div>--- 모달 ---</div>
 
 </body>
