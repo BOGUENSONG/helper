@@ -35,7 +35,6 @@ public class baseController {
     @RequestMapping(value = "/main") //메인화면
     public String mainWindow(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException{
         model.addAttribute("id",id);
-        System.out.println(id);
         return "main";
     }
 

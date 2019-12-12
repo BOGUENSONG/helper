@@ -8,6 +8,15 @@
     <title> HELPER :: 메인화면 </title>
     <style type="text/css">
         <%--        스타일 추가--%>
+        h1{
+            margin-top: 100px;
+            width: 100%;
+            text-align: center;}
+        .button{
+            text-align: center;
+        }
+
+
     </style>
 </head>
 <body>
@@ -52,7 +61,10 @@
 <%--    <a>보유포인트: <c:out value="${point}"/> </a>--%>
 <%--    <a>위치:<c:out value="${location}"/> </a>--%>
 </div>
-<div>
+
+<img src="/resources/img/test1.png">
+
+<div class="button">
     <input type="button" value="현재 진행중인 의뢰" onclick="goProgressingRequest()">
     <input type="button" value="내 정보 관리" onclick="goMyInfo()">
     <input type="button" value="의뢰 등록" onclick="goRegistRequest()">
