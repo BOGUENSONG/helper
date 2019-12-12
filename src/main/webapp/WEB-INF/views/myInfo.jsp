@@ -8,10 +8,28 @@
     <title> HELPER :: 내정보 </title>
     <style type="text/css">
         <%--        스타일 추가--%>
+        h1{
+
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid black;
+        }
+        #prevButton{
+            background-color: black;
+            color:white;
+            position:absolute;
+            top:0;
+            margin-top: 10px;
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
 <script>
+    function gotoprev(){
+        history.back();
+    }
     function getId() {
         var params = location.search.substr(location.search.indexOf("?") + 1);
         var sval = "";
@@ -113,16 +131,19 @@
     }
 </script>
 <h1> HELPER :: 내 정보 </h1>
+<input type="button" value="《" id="prevButton" onclick="gotoprev()">
 <div>
     id : <c:out value="${id}"/>
     전화번호 : <c:out value="${pn}"/>
     내 포인트 : <c:out value="${point}"/>
 </div>
+
 <div>
     새 비밀번호: <input type="text" id="newPW">
     새 전화번호: <input type="text" placeholder="ex) 01012341234" id="newPN">
     <input type="button" value="변경" onclick="modifyInfo()">
 </div>
+
 <div>
     <input type="button" value="포인트 충전" onclick="pointAdd()">
     <input type="button" value="포인트 전환" onclick="pointSub()">

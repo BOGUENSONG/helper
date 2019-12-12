@@ -75,6 +75,7 @@ body{
 <body>
 <script>
 
+
     function closemodal(){
         $('.modal').hide();
     }
@@ -144,7 +145,7 @@ body{
     <h1> HELPER :: HELPER</h1>
 <div class="main">
     <div class="idpw"><input type="text" id="loginID" placeholder=" 아이디"></div>
-    <div class="idpw"><input type="text" id="loginPW" placeholder=" 비밀번호"></div>
+    <div class="idpw"><input type="password" id="loginPW" placeholder=" 비밀번호"></div>
 
     <div class="idpw"><input type="button" value="로그인" onclick="loginValidation()" id="loginBut"></div>
 </div>
@@ -153,9 +154,9 @@ body{
     <div id="xbuttonWrap"><input type="button" value="x" id="xbutton" onclick="closemodal()"></div>
     <div class="reg"> 회원가입 </div>
     <div class="reg"> 아이디   :  <input type="text" id="registID"></div>
-    <div class="reg"> 비밀번호 :  <input type="text" id="registPW"></div>
+    <div class="reg"> 비밀번호 :  <input type="password" id="registPW"></div>
     <div class="reg"> 전화번호 :  <input type="text" id="registPN"></div>
-    <div class="reg"> 지역 : <select name="region">
+    <div class="reg"> 지역 : <select name="region" >
         <option value="">지역선택</option>
         <option value="서울특별시">서울특별시</option>
         <option value="대전광역시">대전광역시</option>
