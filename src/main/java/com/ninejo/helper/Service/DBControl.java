@@ -316,6 +316,20 @@ public class DBControl {
         return true;
     } // 의뢰번호 매개변수로 받아서 수락여부 확인 후 수락했으면 false 리턴, 안했으면 제거하고 true 리턴
 
+    public String getPhoneNumber (String id) throws SQLException{
+
+        String sql = String.format("select phone_number from helper.member where id = '%s';", id);
+        ResultSet rs = db.getResult(sql);
+
+       String s = "";
+        while(rs.next()) {
+            s = rs.getString("phone_number");
+            if(rs.wasNull())
+                return "no pn";
+        }
+        return s;
+    }
+
      // 이 밑으론 신경 x
     public int getReqCount() throws SQLException {
 
