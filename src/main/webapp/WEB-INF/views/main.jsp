@@ -9,17 +9,29 @@
     <style type="text/css">
         <%--        스타일 추가--%>
         h1{
-            margin-top: 100px;
-            width: 100%;
-            text-align: center;}
-        .button{
-            text-align: center;
-        }
-        body{
-            background-image: url("/resources/img/test1.png");
-            background-size: cover;
 
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid black;
         }
+        .buttonWrap{
+            text-align: center;
+            margin-top: 100px;
+        }
+        .button{
+            width: 50%;
+            height: 50px;
+            margin-bottom: 50px;
+            color: white;
+            background-color: black;
+        }
+        .button:hover{
+            cursor: pointer;
+            background-color: white;
+            color: black;
+        }
+
 
 
     </style>
@@ -69,11 +81,11 @@
 
 
 
-<div class="button">
-    <input type="button" value="현재 진행중인 의뢰" onclick="goProgressingRequest()">
-    <input type="button" value="내 정보 관리" onclick="goMyInfo()">
-    <input type="button" value="의뢰 등록" onclick="goRegistRequest()">
-    <input type="button" value="의뢰 목록" onclick="goRequestList()">
+<div class="buttonWrap">
+    <div > <input type="button" value="현재 진행중인 의뢰" onclick="goProgressingRequest()" class="button"> </div>
+    <div > <input type="button" value="내 정보 관리" onclick="goMyInfo()" class="button"> </div>
+    <div > <input type="button" value="의뢰 등록" onclick="goRegistRequest()" class="button"> </div>
+    <div > <input type="button" value="의뢰 목록" onclick="goRequestList()" class="button"> </div>
 </div>
 </body>
 

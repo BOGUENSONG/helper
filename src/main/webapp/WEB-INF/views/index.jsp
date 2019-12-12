@@ -14,6 +14,16 @@
             text-align: center;}
         .modal{
             display: none;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            margin: 15%;
+            width: 70%;
+            height: 80%;
+            border: 3px double black;
+            background-color: white;
+            text-align: center;
+
         }
         #loginID,#loginPW,#loginBut{
             width: 80%;
@@ -44,10 +54,16 @@
             color:white;
             cursor: pointer;
         }
+        #xbutton{
+            background-color: black;
+            color: white;
+        }
+        #xbuttonWrap{
+            text-align: right;
+        }
 body{
     background-image: url("/resources/img/test1.png");
     background-size: cover;
-
 }
 
 
@@ -66,9 +82,8 @@ body{
         return sval;
     }
     function registOpen(){
-    alert("하이");
-    //이전 창이 숨겨지고 회원가입 모달창을 띄운다
-    //이전창 이름 :
+
+        $('.modal').show();
     }
     function registValidation(){
         $.ajax({
@@ -121,18 +136,21 @@ body{
 </script>
     <h1> HELPER :: HELPER</h1>
 <div class="main">
-    <div class="idpw"><input type="text" id="loginID" placeholder="아이디"></div>
-    <div class="idpw"><input type="text" id="loginPW" placeholder="비밀번호"></div>
+    <div class="idpw"><input type="text" id="loginID" placeholder=" 아이디"></div>
+    <div class="idpw"><input type="text" id="loginPW" placeholder=" 비밀번호"></div>
 
     <div class="idpw"><input type="button" value="로그인" onclick="loginValidation()" id="loginBut"></div>
 </div>
 <div class="idpw"> <input type="button" value="회원가입" onclick="registOpen()" id="registBut"> </div>
+<div class="modal">
+    <div id="xbuttonWrap"><input type="button" value="x" id="xbutton"></div>
+    <div > 회원가입 </div>
 
-<div class="modal"> ----회원가입 모달----
-<div>회원가입 머리</div>
-    <div> 아이디 : <input type="text" id="registID">
-        비번 :<input type="text" id="registPW">
-        전화번호 <input type="text" id="registPN"></div>
+
+    <div> 아이디   :  <input type="text" id="registID"></div>
+    <div> 비밀번호 :  <input type="text" id="registPW"></div>
+    <div> 전화번호 :  <input type="text" id="registPN"></div>
+
     <div> <input type="button" value="확인" onclick="registValidation()"> </div>
 </div>
 </body>
