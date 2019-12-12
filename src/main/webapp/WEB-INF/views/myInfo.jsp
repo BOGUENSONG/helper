@@ -23,6 +23,19 @@
             margin-top: 10px;
             margin-left: 5px;
         }
+        .modal{
+            display: none;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            margin: 15%;
+            width: 70%;
+            height: 80%;
+            border: 3px double black;
+            background-color: white;
+            text-align: center;
+
+        }
     </style>
 </head>
 <body>
@@ -108,34 +121,20 @@
         // DB 포인트 정보 수정 후 완료 메세지 후
         // 새로고침해서 내 포이트 수정된거 확인
     }
-    function goToSolveRequestList(){
-        $.ajax({
-            url: "/solvedrequest",
-            type: "get",
-            dataType: "json",
-            contentType:'application/json; charset=utf-8',
-            data: {"ID": getId()},
-            success: function(data) {
-                if (data) {
-
-                }
-                else {
-                    alert("SQL오류");
-                }
-            },
-            error:function(error) {
-                alert("서버 오류");
-            }
-        });
         // 완료 의뢰 모달창 띄우기
-    }
+        function closemodal(){
+            $('.modal').hide();
+        }
+        function openmodal(){
+            $('.modal').show();
+        }
 </script>
 <h1> HELPER :: 내 정보 </h1>
 <input type="button" value="《" id="prevButton" onclick="gotoprev()">
 <div>
-    id : <c:out value="${id}"/>
-    전화번호 : <c:out value="${pn}"/>
-    내 포인트 : <c:out value="${point}"/>
+    id : <c:out value="${mlist.id}"/>
+    전화번호 : <c:out value="${mlist.phone_number}"/>
+    내 포인트 : <c:out value="${mlist.point}"/>
 </div>
 
 <div>
@@ -147,10 +146,19 @@
 <div>
     <input type="button" value="포인트 충전" onclick="pointAdd()">
     <input type="button" value="포인트 전환" onclick="pointSub()">
-    <input type="button" value="완료 의뢰 목록" onclick="goToSolveRequestList()">
+    <input type="button" value="완료 의뢰 목록" onclick="openmodal()">
 </div>
-<div>
-    ------모달 관련-----
+
+<div class="modal">
+    <div id="xbuttonWrap"><input type="button" value="x" id="xbutton" onclick="closemodal()"></div>
+    <c:forEach items = "${rlist}" var="item" varStatus = "status">
+        <div><p>"<c:out value="${item.title}"/>"</p>
+            <p>"<c:out value="${item.start_date}"/>"</p>
+            <p>"<c:out value="${item.reward}"/>"</p>
+            <p>"<c:out value="${item.locate}"/>"</p>
+        </div>
+
+    </c:forEach>
 </div>
 </body>
 

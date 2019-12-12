@@ -63,7 +63,9 @@ public class baseController {
     @RequestMapping(value = "/myInfo") //내정보
     public String myInfo(@RequestParam("id") String id , Model model) throws IOException, SAXException, ParserConfigurationException, SQLException {
         ArrayList rlist = dbc.getSolvedRequestList(id);
-        model.addAttribute("list",rlist);
+        model.addAttribute("rlist",rlist);
+        HashMap mlist = dbc.getMemberInfo(id);
+        model.addAttribute("mlist",mlist);
         return "myInfo";
     }
 
