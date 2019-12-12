@@ -45,7 +45,7 @@ public class DBControl {
     public void resister (String id, String password, String phoneNumber, String locate) throws  SQLException{
 
         String sql = String.format(" insert into helper.member (id, password, phone_number, locate) " +
-                "values ('%s', '%s', '%s, '%s')", id, password, phoneNumber, locate);
+                "values ('%s', '%s', '%s', '%s')", id, password, phoneNumber, locate);
 
         db.getResultmodify(sql);
     } // id, pw, pn 매개변수로 받아서 db에 저장
@@ -271,11 +271,17 @@ public class DBControl {
 
         String rid = "";
         String aid = "";
+        int reward = 0;
         String sql = String.format("update helper.request set is_completed = true where req_num = %d",req_num);
         db.getResultmodify(sql);
 
-        sql = String.format("select requester_id from helper.request where req_num = %d",req_num);
+        sql = String.format("select reward from helper.request where req_num = %d", req_num);
         ResultSet rs = db.getResult(sql);
+        while(rs.next()){
+            reward = rs.getInt("reward");
+        }
+        sql = String.format("select requester_id from helper.request where req_num = %d", req_num);
+        rs = db.getResult(sql);
         while(rs.next()){
             rid = rs.getString("requester_id");
         }
@@ -284,6 +290,12 @@ public class DBControl {
         while(rs.next()){
             aid = rs.getString("accepted_id");
         }
+        sql = String.format("update helper.member set point = point + %d where id = '%s'", reward, aid);
+        db.getResultmodify(sql);
+        
+        sql = String.format("update helper.member set point = point - %d where id = '%s'", reward, rid);
+        db.getResultmodify(sql);
+
         sql = String.format("update helper.member set req_request = null where id = '%s'", rid);
         db.getResultmodify(sql);
 
