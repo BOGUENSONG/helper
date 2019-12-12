@@ -60,14 +60,14 @@
         }
         return sval;
     }
-    var id = 'id';//현재 세션에 저장된 id값
+
     function myrequsting(){ //내가 요청한 의뢰
         $.ajax({
             url: "/myrequesting",
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": id},
+            data: {"ID":getId()},
             success: function(data) {
                 if (data) {
 
@@ -88,7 +88,7 @@
             type: "get",
             dataType: "json",
             contentType:'application/json; charset=utf-8',
-            data: {"ID": id},
+            data: {"ID": getId()},
             success: function(data) {
                 if (data) {
 
