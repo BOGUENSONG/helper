@@ -60,8 +60,26 @@
 </head>
 <script>
     function acceptbtn(){
-        //수락하는 함수
-        var requestID = $('#requesterid').html();
+        var requestN = $('#reqnumber').html();
+        $.ajax({
+            url: "/accept",
+            type: "get",
+            dataType: "json",
+            contentType:'application/json; charset=utf-8',
+            data: { "ID": getId(), "req_n" : requestN},
+            success: function(data) {
+                if (data) {
+                    alert("수락 완료");
+                    location.href="/progress?id=" + getId();
+                }
+                else {
+                    alert("이미 수락을 한 의뢰를 해결해야합니다.");
+                }
+            },
+            error:function(error) {
+                alert("서버 오류");
+            }
+        });
     }
     function gotoprev(){
         history.back();
@@ -118,8 +136,8 @@
      <div><a class="listTitle"><c:out value="${item.title}"/></a> <a class="listPoint"><c:out value="${item.reward}pt"/></a> </div>
      <div><a class="listRegion"><c:out value="${item.locate}"/> </a> <a class="listStart"><c:out value="${item.start_date}"/></a> </div>
      <div class="secretInfo">
-         <p> 등록번호: <c:out value="${item.req_num}"/></p>
-         <p> 등록자 : <a id="requesterid"><c:out value="${item.requester_id}"/></a></p>
+         <p> 등록번호:<a id="reqnumber"> <c:out value="${item.req_num}"/></a></p>
+         <p> 등록자 : <c:out value="${item.requester_id}"/></p>
          <p><c:out value="${item.reward}"/>pt</p>
          <p><c:out value="${item.title}"/></p>
          <p><c:out value="${item.start_date}"/></p>
