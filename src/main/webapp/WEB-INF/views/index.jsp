@@ -8,6 +8,44 @@
     <title> HELPER :: HELPER</title>
     <style type="text/css">
 <%--        스타일 추가--%>
+        h1{
+            margin-top: 100px;
+            width: 100%;
+            text-align: center;}
+        .modal{
+            display: none;
+        }
+        #loginID,#loginPW,#loginBut{
+            width: 80%;
+            height: 30px;
+            border : double 3px;
+        }
+        .idpw{
+            text-align: center;
+            padding: 5px;
+        }
+
+        #loginBut{
+            border: none;
+            height: 50px;
+            cursor: pointer;
+        }
+        #loginBut:hover{
+            background-color: black;
+            color: white;
+        }
+        #registBut{
+            border: none;
+            background: none;
+
+        }
+        #registBut:hover{
+            background-color: black;
+            color:white;
+            cursor: pointer;
+        }
+
+
     </style>
 </head>
 <body>
@@ -77,14 +115,15 @@
 
 </script>
     <h1> HELPER :: HELPER</h1>
-<div> Title </div>
-<div> 아이디 : <input type="text" id="loginID">
-비번:    <input type="text" id="loginPW">
-    <input type="button" value="login" onclick="loginValidation()">
-</div>
-<div> <input type="button" value="회원가입" onclick="registOpen()"> </div>
+<div class="main">
+    <div class="idpw"><input type="text" id="loginID" placeholder="아이디"></div>
+    <div class="idpw"><input type="text" id="loginPW" placeholder="비밀번호"></div>
 
-<div> ----회원가입 모달----
+    <div class="idpw"><input type="button" value="로그인" onclick="loginValidation()" id="loginBut"></div>
+</div>
+<div class="idpw"> <input type="button" value="회원가입" onclick="registOpen()" id="registBut"> </div>
+
+<div class="modal"> ----회원가입 모달----
 <div>회원가입 머리</div>
     <div> 아이디 : <input type="text" id="registID">
         비번 :<input type="text" id="registPW">
