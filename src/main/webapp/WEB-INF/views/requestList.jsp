@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 의뢰목록 </title>
     <style type="text/css">
@@ -10,28 +11,36 @@
     </style>
 </head>
 <script>
-    var id = 'id';
-    function reqlist(){ //내가 요청한 의뢰
-        $.ajax({
-            url: "/requestlist",
-            type: "get",
-            dataType: "json",
-            contentType:'application/json; charset=utf-8',
-            data: {"ID": id},
-            success: function(data) {
-                //data 의뢰목록
-            },
-            error:function(error) {
-                alert("서버 오류");
-            }
-        });
+    function getId() {
+        var params = location.search.substr(location.search.indexOf("?") + 1);
+        var sval = "";
+        params = params.split("&");
+        for (var i = 0; i < params.length; i++) {
+            temp = params[i].split("=");
+            if ([temp[0]] == "id") { sval = temp[1]; }
+        }
+        return sval;
     }
+    var id = 'id';
+
     //현재 세션에 저장된 id값
 </script>
 <body>
 <h1> HELPER :: 의뢰목록 </h1>
 <div>--- 리스트 ---</div>
-<input type="button" value="리스트 불러오기" onclick="reqlist()">
+<div>    씨발</div>
+
+<c:forEach items = "${list}" var="item" varStatus = "status">
+<div><c:out value="${item}"></c:out> </div>
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+</c:forEach>
+
 <div>--- 모달 ---</div>
 
 </body>

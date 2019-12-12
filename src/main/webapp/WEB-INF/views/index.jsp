@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: HELPER</title>
     <style type="text/css">
@@ -11,7 +12,16 @@
 </head>
 <body>
 <script>
-
+    function getId() {
+        var params = location.search.substr(location.search.indexOf("?") + 1);
+        var sval = "";
+        params = params.split("&");
+        for (var i = 0; i < params.length; i++) {
+            temp = params[i].split("=");
+            if ([temp[0]] == "id") { sval = temp[1]; }
+        }
+        return sval;
+    }
     function registOpen(){
     alert("하이");
     //이전 창이 숨겨지고 회원가입 모달창을 띄운다
@@ -26,7 +36,7 @@
             data: { "ID": $('#registID').val(), "PW": $('#registPW').val(),"PN" : $('#registPN').val()},
             success: function(data) {
                 if (data) {
-                    location.href="/main";
+                    location.href="/main?id=" + $('#registID').val();
                 }
                 else {
                     alert("이미 중복된 아이디가 있습니다.");
@@ -47,7 +57,8 @@
             data: { "ID": $('#loginID').val(), "PW": $('#loginPW').val()},
             success: function(data) {
                 if (data) {
-                    location.href="/main";
+
+                    location.href="/main?id=" + $('#loginID').val();
                 }
                 else {
                     alert("잘못된 정보입니다.");

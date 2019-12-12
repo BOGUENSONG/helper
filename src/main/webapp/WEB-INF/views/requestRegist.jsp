@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 의뢰등록 </title>
     <style type="text/css">
@@ -11,6 +12,16 @@
 </head>
 <body>
 <script>
+    function getId() {
+        var params = location.search.substr(location.search.indexOf("?") + 1);
+        var sval = "";
+        params = params.split("&");
+        for (var i = 0; i < params.length; i++) {
+            temp = params[i].split("=");
+            if ([temp[0]] == "id") { sval = temp[1]; }
+        }
+        return sval;
+    }
     var id = 'id';//현재 세션에 저장된 id값
     function requestRegistOK(){
         $.ajax({
@@ -37,7 +48,7 @@
         // 등록 후 success하면  성공메세지 출력 후 바로 이전페이지로 이동
     }
     function requestRegistCancel(){
-        location.href="/main";
+        location.href="/main?id="+ getId();
         //뒤로 가기
     }
 </script>

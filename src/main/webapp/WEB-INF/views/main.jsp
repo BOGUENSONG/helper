@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title> HELPER :: 메인화면 </title>
     <style type="text/css">
@@ -11,18 +12,28 @@
 </head>
 <body>
 <script>
+    function getId() {
+        var params = location.search.substr(location.search.indexOf("?") + 1);
+        var sval = "";
+        params = params.split("&");
+        for (var i = 0; i < params.length; i++) {
+            temp = params[i].split("=");
+            if ([temp[0]] == "id") { sval = temp[1]; }
+        }
+        return sval;
+    }
     var id = 'id';//현재 세션에 저장된 id값
     function goProgressingRequest(){
-        location.href="/progress";
+        location.href="/progress?id=" + getId();
 
         //현재 진행중인 의뢰 페이지로 이동
     }
     function goMyInfo(){
-        location.href="/myInfo";
+        location.href="/myInfo?id=" +  getId();
         // 내 정보 관리 페이지로 이동
     }
     function goRegistRequest(){
-        location.href="/requestRegist";
+        location.href="/requestRegist?id=" +  getId();
         // 의뢰 등록 페이지로 이동
         // 여기서 페이지 이동전, 이미 내가 의뢰한 의뢰가 있는지 확인
         // id를 서버로 보내서 의뢰 있는지 false/ true를 받아서
@@ -30,16 +41,17 @@
 
     }
     function goRequestList(){
-        location.href="/requestList";
+        location.href="/requestList?id="+ getId();
         //의뢰 목록 페이지로 이동
 
     }
 </script>
 
 <h1> HELPER :: 메인화면 </h1>
-<div> <a>id: <c:out value="${id}"/></a>
-    <a>보유포인트: <c:out value="${point}"/> </a>
-    <a>위치:<c:out value="${location}"/> </a></div>
+<%--<div> <a>id: <c:out value="${id}"/></a>--%>
+<%--    <a>보유포인트: <c:out value="${point}"/> </a>--%>
+<%--    <a>위치:<c:out value="${location}"/> </a>--%>
+</div>
 <div>
     <input type="button" value="현재 진행중인 의뢰" onclick="goProgressingRequest()">
     <input type="button" value="내 정보 관리" onclick="goMyInfo()">
