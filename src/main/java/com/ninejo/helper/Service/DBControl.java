@@ -45,7 +45,7 @@ public class DBControl {
     public void resister (String id, String password, String phoneNumber, String locate) throws  SQLException{
 
         String sql = String.format(" insert into helper.member (id, password, phone_number, locate) " +
-                "values ('%s', '%s', '%s, '%s')", id, password, phoneNumber, locate);
+                "values ('%s', '%s', '%s', '%s')", id, password, phoneNumber, locate);
 
         db.getResultmodify(sql);
     } // id, pw, pn 매개변수로 받아서 db에 저장
@@ -134,19 +134,22 @@ public class DBControl {
     public HashMap<String, Object> getPostRequest (String id) throws SQLException {
 
         int num = 0;
+        HashMap<String, Object> r = new HashMap<>();
 
         String sql = String.format("select req_request from helper.member where id = '%s'");
 
         ResultSet rs = db.getResult(sql);
 
-        while(rs.next())
+        while(rs.next()) {
             num = rs.getInt("req_request");
+            if(rs.wasNull())
+                return r;
+        }
 
         sql = String.format("select * from helper.request where req_num = %d", num);
 
         rs = db.getResult(sql);
 
-        HashMap<String, Object> r = new HashMap<>();
         while(rs.next()){
             r.put("req_num", rs.getInt("req_num"));
             r.put("requester_id", rs.getString("requester_id"));
@@ -166,19 +169,22 @@ public class DBControl {
     public HashMap<String, Object> getAcptRequest (String id) throws SQLException {
 
         int num = 0;
+        HashMap<String, Object> r = new HashMap<>();
 
         String sql = String.format("select acpt_request from helper.member where id = '%s'");
 
         ResultSet rs = db.getResult(sql);
 
-        while(rs.next())
+        while(rs.next()) {
             num = rs.getInt("acpt_request");
+            if(rs.wasNull())
+                return r;
+        }
 
         sql = String.format("select * from helper.request where req_num = %d", num);
 
         rs = db.getResult(sql);
 
-        HashMap<String, Object> r = new HashMap<>();
         while(rs.next()){
             r.put("req_num", rs.getInt("req_num"));
             r.put("requester_id", rs.getString("requester_id"));
@@ -271,11 +277,17 @@ public class DBControl {
 
         String rid = "";
         String aid = "";
+        int reward = 0;
         String sql = String.format("update helper.request set is_completed = true where req_num = %d",req_num);
         db.getResultmodify(sql);
 
-        sql = String.format("select requester_id from helper.request where req_num = %d",req_num);
+        sql = String.format("select reward from helper.request where req_num = %d", req_num);
         ResultSet rs = db.getResult(sql);
+        while(rs.next()){
+            reward = rs.getInt("reward");
+        }
+        sql = String.format("select requester_id from helper.request where req_num = %d", req_num);
+        rs = db.getResult(sql);
         while(rs.next()){
             rid = rs.getString("requester_id");
         }
@@ -284,6 +296,12 @@ public class DBControl {
         while(rs.next()){
             aid = rs.getString("accepted_id");
         }
+        sql = String.format("update helper.member set point = point + %d where id = '%s'", reward, aid);
+        db.getResultmodify(sql);
+
+        sql = String.format("update helper.member set point = point - %d where id = '%s'", reward, rid);
+        db.getResultmodify(sql);
+
         sql = String.format("update helper.member set req_request = null where id = '%s'", rid);
         db.getResultmodify(sql);
 
